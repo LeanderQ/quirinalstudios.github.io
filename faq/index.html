@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAQ — Quirinal Studios</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0f0f11;
+      --surface: #1a1a1f;
+      --border: #2a2a32;
+      --text: #f0f0f5;
+      --muted: #8888a0;
+      --accent: #6e6af5;
+      --accent-hover: #8884ff;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { color: var(--accent-hover); }
+
+    nav {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+
+    nav a { color: var(--muted); font-size: 0.9rem; }
+    nav a:hover { color: var(--text); }
+
+    header {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 64px 24px 40px;
+    }
+
+    h1 {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    main {
+      flex: 1;
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+      width: 100%;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 36px 0 12px;
+    }
+
+    .faq-list {
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    details {
+      border-bottom: 1px solid var(--border);
+    }
+
+    details:last-child { border-bottom: none; }
+
+    summary {
+      padding: 18px 24px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--surface);
+      user-select: none;
+      transition: background 0.15s;
+    }
+
+    summary:hover { background: #1f1f26; }
+
+    summary::after {
+      content: '+';
+      color: var(--muted);
+      font-size: 1.2rem;
+      font-weight: 300;
+      flex-shrink: 0;
+      margin-left: 16px;
+    }
+
+    details[open] summary::after { content: '−'; }
+
+    .answer {
+      padding: 0 24px 18px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      background: var(--surface);
+    }
+
+    .answer p + p { margin-top: 8px; }
+
+    .still-stuck {
+      margin-top: 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 24px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .still-stuck p { color: var(--muted); font-size: 0.9rem; }
+    .still-stuck strong { display: block; color: var(--text); font-size: 1rem; margin-bottom: 4px; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 20px;
+      border-radius: 12px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      background: var(--accent);
+      color: #fff;
+      white-space: nowrap;
+      transition: opacity 0.15s;
+    }
+
+    .btn:hover { color: #fff; opacity: 0.85; }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    footer a { color: var(--muted); }
+    footer a:hover { color: var(--text); }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/">← Quirinal Studios</a>
+    <a href="/support">Support</a>
+  </nav>
+
+  <header>
+    <h1>FAQ</h1>
+    <p class="subtitle">Answers to common questions about our apps.</p>
+  </header>
+
+  <main>
+
+    <p class="section-label">General</p>
+    <div class="faq-list">
+      <details>
+        <summary>What platforms are your apps available on?</summary>
+        <div class="answer">
+          <p>Our apps are built for iOS. We don't currently have plans for Android or web versions.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Are your apps free?</summary>
+        <div class="answer">
+          <p><!-- Describe your pricing model here --></p>
+        </div>
+      </details>
+      <details>
+        <summary>Where can I find the latest updates?</summary>
+        <div class="answer">
+          <p>Updates are released through the App Store. Enable automatic updates on your device to always have the latest version.</p>
+        </div>
+      </details>
+    </div>
+
+    <p class="section-label">Basic Reader</p>
+    <div class="faq-list">
+      <details>
+        <summary>When will Basic Reader be available?</summary>
+        <div class="answer">
+          <p>Basic Reader is coming soon. <!-- Add release info here --></p>
+        </div>
+      </details>
+      <details>
+        <summary>What file formats does Basic Reader support?</summary>
+        <div class="answer">
+          <p><!-- List supported formats here --></p>
+        </div>
+      </details>
+    </div>
+
+    <p class="section-label">Dice With the Universe</p>
+    <div class="faq-list">
+      <details>
+        <summary>When will Dice With the Universe be available?</summary>
+        <div class="answer">
+          <p>Dice With the Universe is coming soon. <!-- Add release info here --></p>
+        </div>
+      </details>
+      <details>
+        <summary>How does it work?</summary>
+        <div class="answer">
+          <p><!-- Describe the app mechanic here --></p>
+        </div>
+      </details>
+    </div>
+
+    <div class="still-stuck">
+      <div>
+        <strong>Still have a question?</strong>
+        <p>We'll get back to you within 1–2 business days.</p>
+      </div>
+      <a class="btn" href="mailto:support@quirinalstudios.com">✉ Contact support</a>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Quirinal Studios · <a href="/privacy">Privacy Policy</a></p>
+  </footer>
+
+</body>
+</html>

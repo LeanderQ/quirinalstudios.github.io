@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Support — Quirinal Studios</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0f0f11;
+      --surface: #1a1a1f;
+      --border: #2a2a32;
+      --text: #f0f0f5;
+      --muted: #8888a0;
+      --accent: #6e6af5;
+      --accent-hover: #8884ff;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { color: var(--accent-hover); }
+
+    nav {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+
+    nav a { color: var(--muted); font-size: 0.9rem; }
+    nav a:hover { color: var(--text); }
+
+    header {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 64px 24px 40px;
+    }
+
+    h1 {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    main {
+      flex: 1;
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+      width: 100%;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      margin-bottom: 20px;
+    }
+
+    .card h2 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+    }
+
+    .email-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: #fff;
+      padding: 11px 22px;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: opacity 0.15s;
+    }
+
+    .email-btn:hover { color: #fff; opacity: 0.85; }
+
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 28px 0;
+    }
+
+    .faq-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 24px 28px;
+      color: var(--text);
+      transition: border-color 0.2s;
+    }
+
+    .faq-link:hover { border-color: var(--accent); color: var(--text); }
+
+    .faq-link .label { font-weight: 500; }
+    .faq-link .desc { font-size: 0.85rem; color: var(--muted); margin-top: 2px; }
+    .faq-link .arrow { color: var(--muted); font-size: 1.1rem; }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    footer a { color: var(--muted); }
+    footer a:hover { color: var(--text); }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/">← Quirinal Studios</a>
+    <a href="/faq">FAQ</a>
+  </nav>
+
+  <header>
+    <h1>Support</h1>
+    <p class="subtitle">We're happy to help. Reach out and we'll get back to you.</p>
+  </header>
+
+  <main>
+
+    <div class="card">
+      <h2>Contact us</h2>
+      <p>Send us an email and we'll respond as soon as we can — usually within 1–2 business days.</p>
+      <a class="email-btn" href="mailto:support@quirinalstudios.com">
+        ✉ support@quirinalstudios.com
+      </a>
+
+      <hr class="divider" />
+
+      <h2>What to include</h2>
+      <p>To help us resolve your issue quickly, please mention:<br>
+        · The app name and version (found in Settings → About)<br>
+        · Your iOS version<br>
+        · A short description of what happened
+      </p>
+    </div>
+
+    <a class="faq-link" href="/faq">
+      <div>
+        <div class="label">Frequently asked questions</div>
+        <div class="desc">Browse common questions before reaching out</div>
+      </div>
+      <span class="arrow">→</span>
+    </a>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Quirinal Studios · <a href="/privacy">Privacy Policy</a></p>
+  </footer>
+
+</body>
+</html>
