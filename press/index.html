@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Press — Quirinal Studios</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0f0f11;
+      --surface: #1a1a1f;
+      --border: #2a2a32;
+      --text: #f0f0f5;
+      --muted: #8888a0;
+      --accent: #6e6af5;
+      --accent-hover: #8884ff;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { color: var(--accent-hover); }
+
+    nav {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    nav a { color: var(--muted); font-size: 0.9rem; }
+    nav a:hover { color: var(--text); }
+
+    header {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 64px 24px 40px;
+    }
+
+    h1 {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    main {
+      flex: 1;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+      width: 100%;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 40px 0 14px;
+    }
+
+    /* About blurb */
+    .blurb {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px;
+      color: #c0c0d0;
+      font-size: 0.95rem;
+    }
+
+    /* App press cards */
+    .press-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 24px 28px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 16px;
+    }
+
+    .press-card .app-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 14px;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: var(--border);
+    }
+
+    .press-card .app-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .press-card .info { flex: 1; }
+    .press-card h2 { font-size: 1rem; font-weight: 600; }
+    .press-card p { font-size: 0.85rem; color: var(--muted); margin-top: 2px; }
+
+    .press-card .actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      transition: opacity 0.15s;
+      white-space: nowrap;
+    }
+
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { color: #fff; opacity: 0.85; }
+
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover { border-color: var(--accent); }
+
+    /* Assets grid */
+    .assets-grid {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+
+    .asset-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .asset-card .icon { font-size: 2rem; margin-bottom: 10px; }
+    .asset-card h3 { font-size: 0.9rem; font-weight: 600; margin-bottom: 4px; }
+    .asset-card p { font-size: 0.8rem; color: var(--muted); margin-bottom: 14px; }
+
+    /* Contact */
+    .contact-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .contact-card strong { display: block; font-size: 1rem; margin-bottom: 4px; }
+    .contact-card p { color: var(--muted); font-size: 0.88rem; }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    footer a { color: var(--muted); }
+    footer a:hover { color: var(--text); }
+  </style>
+</head>
+<body>
+
+  <nav><a href="/">← Quirinal Studios</a></nav>
+
+  <header>
+    <h1>Press</h1>
+    <p class="subtitle">Everything you need to cover Quirinal Studios and our apps.</p>
+  </header>
+
+  <main>
+
+    <p class="section-label">About</p>
+    <div class="blurb">
+      <p>Quirinal Studios is an independent iOS studio focused on building simple, well-crafted apps. <!-- Expand this with your story, founding year, location, etc. --></p>
+    </div>
+
+    <p class="section-label">Apps</p>
+
+    <div class="press-card">
+      <div class="app-icon">
+        <img src="/images/BasicReader Icon.jpeg" alt="Basic Reader icon" />
+      </div>
+      <div class="info">
+        <h2>Basic Reader</h2>
+        <p>iOS · Coming soon</p>
+      </div>
+      <div class="actions">
+        <a class="btn btn-secondary" href="/basic-reader">App page →</a>
+        <!-- Uncomment and link when press kit is ready:
+        <a class="btn btn-primary" href="/press/basic-reader-presskit.zip">↓ Press kit</a>
+        -->
+      </div>
+    </div>
+
+    <div class="press-card">
+      <div class="app-icon">
+        <img src="/images/DiceWithTheUniverse Icon.jpeg" alt="Dice With the Universe icon" />
+      </div>
+      <div class="info">
+        <h2>Dice With the Universe</h2>
+        <p>iOS · Coming soon</p>
+      </div>
+      <div class="actions">
+        <a class="btn btn-secondary" href="/dice-with-the-universe">App page →</a>
+        <!-- Uncomment and link when press kit is ready:
+        <a class="btn btn-primary" href="/press/dice-presskit.zip">↓ Press kit</a>
+        -->
+      </div>
+    </div>
+
+    <p class="section-label">Assets</p>
+    <div class="assets-grid">
+      <div class="asset-card">
+        <div class="icon">🖼</div>
+        <h3>App icons</h3>
+        <p>High-res icons for both apps</p>
+        <a class="btn btn-secondary" href="#">↓ Download</a>
+      </div>
+      <div class="asset-card">
+        <div class="icon">📸</div>
+        <h3>Screenshots</h3>
+        <p>App Store screenshots</p>
+        <a class="btn btn-secondary" href="#">↓ Download</a>
+      </div>
+      <div class="asset-card">
+        <div class="icon">🏷</div>
+        <h3>Studio logo</h3>
+        <p>Wordmark and logomark</p>
+        <a class="btn btn-secondary" href="#">↓ Download</a>
+      </div>
+    </div>
+
+    <p class="section-label">Press contact</p>
+    <div class="contact-card">
+      <div>
+        <strong>Media inquiries</strong>
+        <p>We typically respond within one business day.</p>
+      </div>
+      <a class="btn btn-primary" href="mailto:press@quirinalstudios.com">✉ press@quirinalstudios.com</a>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Quirinal Studios · <a href="/privacy">Privacy Policy</a></p>
+  </footer>
+
+</body>
+</html>
