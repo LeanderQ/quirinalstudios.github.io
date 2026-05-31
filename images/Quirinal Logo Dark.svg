@@ -17,6 +17,7 @@
        width="511.60831"
        height="116.79804"
        id="rect8" />
+    <style>@import url('https://fonts.googleapis.com/css2?family=Cinzel&amp;display=swap');</style>
   </defs>
   <g
      id="g1"
@@ -54,12 +55,10 @@
          id="path2" />
     </g>
     <text
-       xml:space="preserve"
-       transform="translate(18.367933,2.8735865)"
        id="text8"
-       style="font-size:53.3333px;font-family:Cinzel;-inkscape-font-specification:Cinzel;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect8);display:inline;fill:#ffffff"><tspan
-         x="427.71094"
-         y="559.35804"
-         id="tspan1">Quirinal Studios</tspan></text>
+       x="240.15999"
+       y="435"
+       text-anchor="middle"
+       style="font-size:53.3333px;font-family:Cinzel,serif;fill:#ffffff;display:inline;">Quirinal Studios</text>
   </g>
 </svg>
