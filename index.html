@@ -4,6 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Quirinal Studios</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -37,12 +40,21 @@
     }
 
     .studio-logo {
-      height: 160px;
+      height: 140px;
       width: auto;
     }
 
+    .studio-name {
+      margin-top: 16px;
+      font-family: 'Cinzel', serif;
+      font-size: 1.8rem;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: var(--text);
+    }
+
     .tagline {
-      margin-top: 12px;
+      margin-top: 8px;
       color: var(--muted);
       font-size: 1.1rem;
     }
@@ -196,7 +208,8 @@
 <body>
 
   <header>
-    <img src="/images/Quirinal Logo Dark.svg" alt="Quirinal Studios" class="studio-logo" />
+    <img src="/images/Quirinal Logo Dark.svg" alt="" class="studio-logo" />
+    <h1 class="studio-name">Quirinal Studios</h1>
     <p class="tagline">Independent iOS apps built with after the kids are asleep.</p>
   </header>
 
