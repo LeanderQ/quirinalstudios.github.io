@@ -4,17 +4,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dice With the Universe — Quirinal Studios</title>
+  <meta name="description" content="Roll dice against history's greatest minds. A Farkle strategy game spanning 15 periods of human civilization, coming soon to iPhone." />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
       --bg: #0f0f11;
       --surface: #1a1a1f;
+      --surface-2: #21212a;
       --border: #2a2a32;
       --text: #f0f0f5;
       --muted: #8888a0;
       --accent: #6e6af5;
       --accent-hover: #8884ff;
+      --gold: #c8b850;
+      --gold-bg: #2a2a12;
+      --gold-border: #4a4a20;
     }
 
     body {
@@ -30,40 +35,33 @@
     a { color: var(--accent); text-decoration: none; }
     a:hover { color: var(--accent-hover); }
 
+    /* ── Nav ── */
     nav {
       padding: 20px 24px;
       border-bottom: 1px solid var(--border);
     }
-
-    nav a {
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
-
+    nav a { color: var(--muted); font-size: 0.9rem; }
     nav a:hover { color: var(--text); }
 
+    /* ── Hero ── */
     header {
       max-width: 720px;
       margin: 0 auto;
-      padding: 64px 24px 48px;
+      padding: 64px 24px 56px;
       text-align: center;
     }
 
     .app-icon {
-      width: 96px;
-      height: 96px;
+      width: 100px;
+      height: 100px;
       border-radius: 22px;
       background: var(--surface);
       border: 1px solid var(--border);
       overflow: hidden;
-      margin: 0 auto 24px;
+      margin: 0 auto 28px;
+      box-shadow: 0 8px 32px rgba(110, 106, 245, 0.18);
     }
-
-    .app-icon img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+    .app-icon img { width: 100%; height: 100%; object-fit: cover; }
 
     h1 {
       font-size: clamp(2rem, 5vw, 3rem);
@@ -71,52 +69,247 @@
       letter-spacing: -0.02em;
     }
 
-    .subtitle {
-      margin-top: 12px;
+    .tagline {
+      margin-top: 14px;
       color: var(--muted);
-      font-size: 1.1rem;
+      font-size: 1.15rem;
+      font-style: italic;
+    }
+
+    .hero-desc {
+      margin-top: 20px;
+      font-size: 1.05rem;
+      color: var(--text);
+      max-width: 540px;
+      margin-left: auto;
+      margin-right: auto;
+      opacity: 0.85;
     }
 
     .badge {
       display: inline-block;
-      margin-top: 16px;
+      margin-top: 22px;
       font-size: 0.72rem;
       font-weight: 600;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      padding: 3px 8px;
+      padding: 4px 10px;
       border-radius: 6px;
-      background: #2a2a12;
-      color: #c8b850;
-      border: 1px solid #4a4a20;
+      background: var(--gold-bg);
+      color: var(--gold);
+      border: 1px solid var(--gold-border);
     }
 
+    /* ── Main layout ── */
     main {
       flex: 1;
       max-width: 720px;
       margin: 0 auto;
-      padding: 0 24px 80px;
+      padding: 0 24px 96px;
       width: 100%;
     }
 
-    .features {
-      display: grid;
+    /* ── Section headings ── */
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+
+    .section-body {
+      color: var(--muted);
+      font-size: 1rem;
+      max-width: 560px;
+    }
+
+    /* ── Screenshots ── */
+    .screenshots {
+      margin-top: 64px;
+    }
+
+    .screenshots-scroll {
+      display: flex;
       gap: 16px;
+      margin-top: 28px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      scrollbar-width: none;
+    }
+    .screenshots-scroll::-webkit-scrollbar { display: none; }
+
+    .screenshot {
+      flex: 0 0 220px;
+      height: 390px;
+      border-radius: 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .screenshot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Placeholder style for missing screenshots */
+    .screenshot-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: var(--surface-2);
+    }
+    .screenshot-placeholder .ph-icon { font-size: 2rem; opacity: 0.3; }
+    .screenshot-placeholder .ph-label {
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-align: center;
+      padding: 0 16px;
+      opacity: 0.6;
+    }
+
+    /* ── Features ── */
+    .features {
+      margin-top: 64px;
+    }
+
+    .features-grid {
+      display: grid;
+      gap: 14px;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      margin-top: 48px;
+      margin-top: 28px;
     }
 
     .feature {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 20px;
+      padding: 22px 20px;
     }
-
-    .feature .icon { font-size: 1.5rem; margin-bottom: 10px; }
-    .feature h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 4px; }
+    .feature .icon { font-size: 1.4rem; margin-bottom: 10px; }
+    .feature h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 5px; }
     .feature p { font-size: 0.85rem; color: var(--muted); }
 
+    /* ── Journey / Eras ── */
+    .journey {
+      margin-top: 64px;
+    }
+
+    .eras {
+      margin-top: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .era {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px 24px;
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    .era-number {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--accent);
+      opacity: 0.4;
+      line-height: 1;
+      flex-shrink: 0;
+      width: 36px;
+    }
+
+    .era-content h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .era-content .era-tag {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 5px;
+      background: var(--gold-bg);
+      color: var(--gold);
+      border: 1px solid var(--gold-border);
+      margin-bottom: 8px;
+    }
+
+    .era-content p {
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+
+    /* ── Dice CTA ── */
+    .dice-cta {
+      margin-top: 64px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 40px 32px;
+      text-align: center;
+    }
+
+    .dice-cta h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+
+    .dice-cta p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 400px;
+      margin: 0 auto 24px;
+    }
+
+    .app-store-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--text);
+      color: var(--bg);
+      padding: 13px 24px;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: opacity 0.15s;
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .app-store-btn svg { width: 20px; height: 20px; flex-shrink: 0; }
+
+    .notify-note {
+      margin-top: 14px;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* ── Footer ── */
     footer {
       border-top: 1px solid var(--border);
       padding: 32px 24px;
@@ -124,42 +317,177 @@
       color: var(--muted);
       font-size: 0.85rem;
     }
-
     footer a { color: var(--muted); }
     footer a:hover { color: var(--text); }
+
+    /* ── Divider ── */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 64px 0 0;
+    }
   </style>
 </head>
 <body>
 
   <nav><a href="/">← Quirinal Studios</a></nav>
 
+  <!-- ── Hero ── -->
   <header>
-    <div class="app-icon"><img src="/images/DiceWithTheUniverse Icon.jpeg" alt="Dice With the Universe icon" /></div>
+    <div class="app-icon">
+      <img src="/images/DiceWithTheUniverse Icon.jpeg" alt="Dice With the Universe icon" />
+    </div>
     <h1>Dice With the Universe</h1>
-    <p class="subtitle">
-      God doesn't play dice with the universe. You do.
+    <p class="tagline">God doesn't play dice with the universe. You do.</p>
+    <p class="hero-desc">
+      A physics-based Farkle strategy game. Roll against 15 of history's greatest minds —
+      from ancient shamans to rogue AI — and build a dice collection worthy of the ages.
     </p>
-    <span class="badge">Coming soon</span>
+    <span class="badge">Coming soon to iPhone</span>
   </header>
 
   <main>
-    <div class="features">
-      <div class="feature">
-        <div class="icon">✦</div>
-        <h3>Feature one</h3>
-        <p>Describe a key feature of Dice With the Universe here.</p>
+
+    <!-- ── Screenshots ── -->
+    <section class="screenshots">
+      <p class="section-label">Screenshots</p>
+      <div class="screenshots-scroll">
+
+        <div class="screenshot">
+          <!-- PLACEHOLDER: In-game dice rolling shot. Show 6 physics dice mid-roll
+               on a dark tabletop surface, some tumbling, some settled. Portrait orientation.
+               File: /dice-with-the-universe/screenshots/gameplay.png -->
+          <div class="screenshot-placeholder">
+            <div class="ph-icon">🎲</div>
+            <div class="ph-label">Gameplay — dice mid-roll on the table</div>
+          </div>
+        </div>
+
+        <div class="screenshot">
+          <!-- PLACEHOLDER: Dice selection / scoring moment. Show kept dice glowing
+               or positioned in the kept area with a score display visible at the bottom.
+               Portrait orientation.
+               File: /dice-with-the-universe/screenshots/selection.png -->
+          <div class="screenshot-placeholder">
+            <div class="ph-icon">✦</div>
+            <div class="ph-label">Choosing which dice to keep</div>
+          </div>
+        </div>
+
+        <div class="screenshot">
+          <!-- PLACEHOLDER: Campaign / era selection screen or level transition screen.
+               Should feel epic — opponent portrait, period name, your score vs theirs.
+               Portrait orientation.
+               File: /dice-with-the-universe/screenshots/campaign.png -->
+          <div class="screenshot-placeholder">
+            <div class="ph-icon">🌍</div>
+            <div class="ph-label">Campaign map — opponent challenge screen</div>
+          </div>
+        </div>
+
+        <div class="screenshot">
+          <!-- PLACEHOLDER: Dice loadout screen. Show the player's collection of unlocked
+               dice — different shapes (D4, D6, D8, D12, D20) with themed materials.
+               Portrait orientation.
+               File: /dice-with-the-universe/screenshots/loadout.png -->
+          <div class="screenshot-placeholder">
+            <div class="ph-icon">⚄</div>
+            <div class="ph-label">Dice loadout — customize your pool of 6</div>
+          </div>
+        </div>
+
       </div>
-      <div class="feature">
-        <div class="icon">✦</div>
-        <h3>Feature two</h3>
-        <p>Describe a key feature of Dice With the Universe here.</p>
+    </section>
+
+    <!-- ── Features ── -->
+    <section class="features">
+      <p class="section-label">Features</p>
+      <p class="section-title">Strategy hiding inside every roll</p>
+      <p class="section-body">Farkle is deceptively simple: push your luck or bank your points. The catch? Every opponent has a different risk appetite — and so do their dice.</p>
+
+      <div class="features-grid">
+        <div class="feature">
+          <div class="icon">🎲</div>
+          <h3>Physics Dice</h3>
+          <p>Every roll is real. Dice tumble, bounce, and settle using full 3D physics — no animations, no predetermined outcomes.</p>
+        </div>
+        <div class="feature">
+          <div class="icon">🌍</div>
+          <h3>15 Periods of History</h3>
+          <p>From the ancient shamans of the Origins era to the rogue AI of the Reckoning. Each period brings new opponents and visual themes.</p>
+        </div>
+        <div class="feature">
+          <div class="icon">⚔️</div>
+          <h3>Boss Fights</h3>
+          <p>Each period ends with a boss who plays harder and smarter. Beat them, and claim one of their dice as your own.</p>
+        </div>
+        <div class="feature">
+          <div class="icon">⚄</div>
+          <h3>Build Your Collection</h3>
+          <p>Unlock D4s, D8s, D12s, D20s, and more across your journey. Mix and match six dice into your personal loadout.</p>
+        </div>
+        <div class="feature">
+          <div class="icon">🎵</div>
+          <h3>Era Soundtrack</h3>
+          <p>Music and visual themes shift as you move through history — from ceremonial drums to synthesized tension.</p>
+        </div>
+        <div class="feature">
+          <div class="icon">🧠</div>
+          <h3>Adaptive AI</h3>
+          <p>Each opponent has their own risk tolerance and banking threshold. Genghis Khan plays very differently than Leonardo da Vinci.</p>
+        </div>
       </div>
-      <div class="feature">
-        <div class="icon">✦</div>
-        <h3>Feature three</h3>
-        <p>Describe a key feature of Dice With the Universe here.</p>
+    </section>
+
+    <!-- ── Journey / Eras ── -->
+    <section class="journey">
+      <p class="section-label">The Journey</p>
+      <p class="section-title">Three eras. Twenty-seven ways to end the story.</p>
+      <p class="section-body">Your choices across 15 periods shape three narrative axes — Order, Voice, Legacy — each with its own reckoning at the end.</p>
+
+      <div class="eras">
+        <div class="era">
+          <div class="era-number">I</div>
+          <div class="era-content">
+            <span class="era-tag">Origins</span>
+            <h3>The First Games</h3>
+            <p>Sit across the table from a Shaman, a Grain Keeper, Hammurabi, Akhenaten, and Qin Shi Huang. Civilization is young and the stakes are everything. Axis: Order vs. Chaos.</p>
+          </div>
+        </div>
+        <div class="era">
+          <div class="era-number">II</div>
+          <div class="era-content">
+            <span class="era-tag">Expansion</span>
+            <h3>The Age of Ambition</h3>
+            <p>Caesar, Hypatia, Genghis Khan, Zheng He, and da Vinci. The world is getting bigger — and so is what you stand to lose. Axis: Voice vs. Silence.</p>
+          </div>
+        </div>
+        <div class="era">
+          <div class="era-number">III</div>
+          <div class="era-content">
+            <span class="era-tag">Reckoning</span>
+            <h3>The Final Roll</h3>
+            <p>Louverture, Tesla, Franklin, an AI Architect, and the Last Council. The universe is watching. What will your dice say about you? Axis: Legacy vs. Oblivion.</p>
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
+
+    <!-- ── CTA ── -->
+    <section class="dice-cta">
+      <h2>Ready to roll against history?</h2>
+      <p>Dice With the Universe is coming soon to iPhone. Check back here or follow Quirinal Studios for release news.</p>
+
+      <div class="app-store-btn" title="Not yet available">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+        </svg>
+        Download on the App Store
+      </div>
+
+      <p class="notify-note">Not yet available — <a href="mailto:hello@quirinalstudios.com">get notified when it drops →</a></p>
+    </section>
+
   </main>
 
   <footer>

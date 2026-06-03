@@ -3,18 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Basic Reader — Quirinal Studios</title>
+  <title>Basic Reader — Clean RSS Reading, No Subscription</title>
+  <meta name="description" content="Basic Reader is a clean, fast RSS reader for iPhone, iPad, and Mac. No subscription. No account. Powerful filters, automatic refresh, OPML support — all free." />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
       --bg: #0f0f11;
       --surface: #1a1a1f;
+      --surface-2: #222228;
       --border: #2a2a32;
       --text: #f0f0f5;
       --muted: #8888a0;
       --accent: #6e6af5;
       --accent-hover: #8884ff;
+      --green: #4ade80;
+      --green-bg: #0d2318;
+      --green-border: #1a4530;
     }
 
     body {
@@ -42,6 +47,7 @@
 
     nav a:hover { color: var(--text); }
 
+    /* ── Hero ── */
     header {
       max-width: 720px;
       margin: 0 auto;
@@ -74,7 +80,10 @@
     .subtitle {
       margin-top: 12px;
       color: var(--muted);
-      font-size: 1.1rem;
+      font-size: 1.15rem;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .badge {
@@ -91,6 +100,62 @@
       border: 1px solid #4a4a20;
     }
 
+    .cta-row {
+      margin-top: 28px;
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.95rem;
+      font-weight: 600;
+      padding: 12px 22px;
+      border-radius: 12px;
+      transition: background 0.15s;
+    }
+
+    .btn-primary:hover { background: var(--accent-hover); color: #fff; }
+
+    /* ── No-sub callout ── */
+    .free-callout {
+      max-width: 720px;
+      margin: 0 auto 8px;
+      padding: 0 24px;
+    }
+
+    .free-callout-inner {
+      background: var(--green-bg);
+      border: 1px solid var(--green-border);
+      border-radius: 16px;
+      padding: 20px 24px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .free-callout-inner .check { font-size: 1.4rem; flex-shrink: 0; }
+
+    .free-callout-inner h2 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--green);
+      margin-bottom: 4px;
+    }
+
+    .free-callout-inner p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* ── Screenshot section ── */
     main {
       flex: 1;
       max-width: 720px;
@@ -99,23 +164,169 @@
       width: 100%;
     }
 
+    .screenshot-block {
+      margin-top: 40px;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      aspect-ratio: 16/10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .screenshot-placeholder {
+      color: var(--muted);
+      font-size: 0.85rem;
+      text-align: center;
+      padding: 24px;
+    }
+
+    .screenshot-placeholder strong {
+      display: block;
+      font-size: 1rem;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .screenshot-block img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* ── Section headings ── */
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-top: 56px;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(1.4rem, 3vw, 1.9rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+
+    .section-body {
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 560px;
+      line-height: 1.65;
+    }
+
+    /* ── Feature grid ── */
     .features {
       display: grid;
       gap: 16px;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      margin-top: 48px;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      margin-top: 28px;
     }
 
     .feature {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 20px;
+      padding: 22px;
     }
 
     .feature .icon { font-size: 1.5rem; margin-bottom: 10px; }
-    .feature h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 4px; }
-    .feature p { font-size: 0.85rem; color: var(--muted); }
+    .feature h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 6px; }
+    .feature p { font-size: 0.85rem; color: var(--muted); line-height: 1.5; }
+
+    /* ── Paywalled comparison list ── */
+    .paywall-list {
+      margin-top: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .paywall-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px 20px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .paywall-item .tag-locked {
+      flex-shrink: 0;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 5px;
+      background: #2a1212;
+      color: #e06060;
+      border: 1px solid #4a2020;
+      margin-top: 2px;
+    }
+
+    .paywall-item .tag-free {
+      flex-shrink: 0;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 5px;
+      background: var(--green-bg);
+      color: var(--green);
+      border: 1px solid var(--green-border);
+      margin-top: 2px;
+    }
+
+    .paywall-item h3 { font-size: 0.92rem; font-weight: 600; margin-bottom: 2px; }
+    .paywall-item p { font-size: 0.82rem; color: var(--muted); line-height: 1.45; }
+
+    /* ── Platform row ── */
+    .platforms {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+
+    .platform-chip {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 16px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* ── Privacy section ── */
+    .privacy-grid {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      margin-top: 28px;
+    }
+
+    .privacy-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px;
+    }
+
+    .privacy-item .icon { font-size: 1.3rem; margin-bottom: 8px; }
+    .privacy-item h3 { font-size: 0.88rem; font-weight: 600; margin-bottom: 4px; }
+    .privacy-item p { font-size: 0.8rem; color: var(--muted); line-height: 1.45; }
 
     footer {
       border-top: 1px solid var(--border);
@@ -127,39 +338,205 @@
 
     footer a { color: var(--muted); }
     footer a:hover { color: var(--text); }
+
+    @media (max-width: 480px) {
+      .free-callout-inner { flex-direction: column; gap: 8px; }
+    }
   </style>
 </head>
 <body>
 
   <nav><a href="/">← Quirinal Studios</a></nav>
 
+  <!-- ── Hero ── -->
   <header>
     <div class="app-icon"><img src="/images/BasicReader Icon.jpeg" alt="Basic Reader icon" /></div>
     <h1>Basic Reader</h1>
     <p class="subtitle">
-      A clean, subscription-free reading experience.
+      A fast, focused RSS reader for iPhone, iPad, and Mac.<br>
+      No subscription. No account. No nonsense.
     </p>
-    <span class="badge">Coming soon</span>
+    <span class="badge">Coming soon to the App Store</span>
+    <div class="cta-row">
+      <!-- Uncomment when live: <a class="btn-primary" href="#">Download on the App Store</a> -->
+      <a class="btn-primary" href="/support">Get notified at launch</a>
+    </div>
   </header>
 
-  <main>
-    <div class="features">
-      <div class="feature">
-        <div class="icon">✦</div>
-        <h3>Feature one</h3>
-        <p>Describe a key feature of Basic Reader here.</p>
-      </div>
-      <div class="feature">
-        <div class="icon">✦</div>
-        <h3>Feature two</h3>
-        <p>Describe a key feature of Basic Reader here.</p>
-      </div>
-      <div class="feature">
-        <div class="icon">✦</div>
-        <h3>Feature three</h3>
-        <p>Describe a key feature of Basic Reader here.</p>
+  <!-- ── No-subscription callout ── -->
+  <div class="free-callout">
+    <div class="free-callout-inner">
+      <span class="check">✦</span>
+      <div>
+        <h2>Everything included. No subscription, ever.</h2>
+        <p>Other RSS readers lock filters, background refresh, and OPML import behind $5–10/month paywalls. Basic Reader ships every one of those features for free — because they should have been free all along.</p>
       </div>
     </div>
+  </div>
+
+  <main>
+
+    <!-- ── Hero screenshot ── -->
+    <div class="screenshot-block">
+      <!-- IMAGE NEEDED: Full-width screenshot of the main article list on iPhone (light or dark mode).
+           Ideal: three-column view on iPad showing sidebar, feed list, and open article side-by-side.
+           Replace the placeholder below with: <img src="/images/basic-reader-screenshot-main.png" alt="Basic Reader article list" /> -->
+      <div class="screenshot-placeholder">
+        <strong>Screenshot — Main article list (iPhone or iPad)</strong>
+        Place a high-quality App Store-style screenshot here.<br>
+        Suggested: dark mode, a feed open with several articles, unread badges visible.
+      </div>
+    </div>
+
+    <!-- ── Core features ── -->
+    <p class="section-label">What you get</p>
+    <h2 class="section-title">Everything you need. Nothing you don't.</h2>
+    <p class="section-body">Basic Reader strips RSS reading down to what matters: fast, clean access to the content you follow — without any of the bloat, dark patterns, or monthly bills that have crept into the category.</p>
+
+    <div class="features">
+      <div class="feature">
+        <div class="icon">⚡️</div>
+        <h3>Background Auto-Refresh</h3>
+        <p>Your feeds update automatically — every 5 minutes, 15 minutes, hourly, or on your schedule. No manual refreshing required.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">🗂</div>
+        <h3>Folders & Organization</h3>
+        <p>Group feeds into collapsible folders. See unread counts at a glance for every feed and folder in your sidebar.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">🔍</div>
+        <h3>Powerful Filter Rules</h3>
+        <p>Hide the noise with wildcard or regex filters, applied globally, per folder, or per feed — against titles, summaries, or both.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">📥</div>
+        <h3>OPML Import & Export</h3>
+        <p>Bring your existing subscriptions in from any reader. Take them out just as easily. Your data is never held hostage.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">🖥</div>
+        <h3>iPhone, iPad & Mac</h3>
+        <p>One purchase, three platforms. A full three-column layout on iPad and Mac; a clean adaptive UI on iPhone.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">🔔</div>
+        <h3>Unread Badge Count</h3>
+        <p>Your app icon shows exactly how many unread articles are waiting — so you never lose track.</p>
+      </div>
+    </div>
+
+    <!-- ── Second screenshot ── -->
+    <div class="screenshot-block" style="margin-top: 32px; aspect-ratio: 4/3;">
+      <!-- IMAGE NEEDED: iPad three-column screenshot showing sidebar with folder structure,
+           article list with unread badges, and an open article on the right.
+           Replace with: <img src="/images/basic-reader-screenshot-ipad.png" alt="Basic Reader on iPad" /> -->
+      <div class="screenshot-placeholder">
+        <strong>Screenshot — iPad three-column layout</strong>
+        Sidebar with folders and unread counts, article list in the middle,<br>
+        article reading view on the right. Dark mode preferred.
+      </div>
+    </div>
+
+    <!-- ── Paywall comparison ── -->
+    <p class="section-label">Free vs. the competition</p>
+    <h2 class="section-title">Paywalled elsewhere. Free here.</h2>
+    <p class="section-body">Premium RSS apps routinely charge $60–120 a year for features that are table stakes. Here's what you get in Basic Reader at no cost.</p>
+
+    <div class="paywall-list">
+      <div class="paywall-item">
+        <span class="tag-locked">Paid elsewhere</span>
+        <div>
+          <h3>Content Filter Rules</h3>
+          <p>Wildcard and regex filters that hide articles by title or summary, scoped to any feed or folder. Feedly charges $8/month for filters. Basic Reader: free.</p>
+        </div>
+        <span class="tag-free">Free</span>
+      </div>
+      <div class="paywall-item">
+        <span class="tag-locked">Paid elsewhere</span>
+        <div>
+          <h3>Automatic Background Refresh</h3>
+          <p>Feeds refresh on a configurable schedule — down to every 5 minutes — while the app is in the background. Many readers limit this to paid tiers.</p>
+        </div>
+        <span class="tag-free">Free</span>
+      </div>
+      <div class="paywall-item">
+        <span class="tag-locked">Paid elsewhere</span>
+        <div>
+          <h3>OPML Import & Export</h3>
+          <p>Full portability, in and out. Import your current feed list from any other reader; export at any time. No lock-in, no fee to leave.</p>
+        </div>
+        <span class="tag-free">Free</span>
+      </div>
+      <div class="paywall-item">
+        <span class="tag-locked">Paid elsewhere</span>
+        <div>
+          <h3>Unread Count App Badge</h3>
+          <p>See your total unread count on the app icon at a glance, without opening the app. Some apps reserve this for premium subscribers.</p>
+        </div>
+        <span class="tag-free">Free</span>
+      </div>
+      <div class="paywall-item">
+        <span class="tag-locked">Paid elsewhere</span>
+        <div>
+          <h3>In-App Browser</h3>
+          <p>Read full articles without leaving the app, using a native browser view on iPhone and iPad, or a WKWebView on Mac.</p>
+        </div>
+        <span class="tag-free">Free</span>
+      </div>
+    </div>
+
+    <!-- ── Filter detail screenshot ── -->
+    <div class="screenshot-block" style="margin-top: 40px;">
+      <!-- IMAGE NEEDED: Screenshot of the Filter Rules screen, showing 2–3 example rules
+           (e.g., a wildcard rule filtering "sponsored" posts, a regex rule).
+           Replace with: <img src="/images/basic-reader-screenshot-filters.png" alt="Filter rules in Basic Reader" /> -->
+      <div class="screenshot-placeholder">
+        <strong>Screenshot — Filter Rules screen</strong>
+        Show the filter rule creation UI with a couple of example rules active.<br>
+        Demonstrates wildcard pattern, scope selector, and match target.
+      </div>
+    </div>
+
+    <!-- ── Platforms ── -->
+    <p class="section-label">Platform support</p>
+    <h2 class="section-title">At home on every Apple screen.</h2>
+    <p class="section-body">Basic Reader is built natively in SwiftUI and runs on iOS, iPadOS, and macOS — with a UI that's designed for each form factor, not just stretched to fit.</p>
+
+    <div class="platforms">
+      <div class="platform-chip">📱 iPhone — adaptive single-column layout, swipe gestures, pull-to-refresh</div>
+      <div class="platform-chip">🖥 iPad — optimized three-column layout, Split View support, smart sidebar</div>
+      <div class="platform-chip">💻 Mac — native Mac Catalyst app, full keyboard navigation</div>
+    </div>
+
+    <!-- ── Privacy ── -->
+    <p class="section-label">Privacy</p>
+    <h2 class="section-title">Your reading habits are nobody's business.</h2>
+    <p class="section-body">Basic Reader has no account system, no analytics SDK, and no backend of its own. All your data lives on your device.</p>
+
+    <div class="privacy-grid">
+      <div class="privacy-item">
+        <div class="icon">🚫</div>
+        <h3>No Analytics</h3>
+        <p>Zero tracking SDKs. We have no idea what you read, and we intend to keep it that way.</p>
+      </div>
+      <div class="privacy-item">
+        <div class="icon">👤</div>
+        <h3>No Account Required</h3>
+        <p>Download and go. No email address, no sign-up, no password to forget.</p>
+      </div>
+      <div class="privacy-item">
+        <div class="icon">📲</div>
+        <h3>Stored Locally</h3>
+        <p>Your feeds and articles stay on your device. We never see them.</p>
+      </div>
+      <div class="privacy-item">
+        <div class="icon">🖼</div>
+        <h3>Image Loading Control</h3>
+        <p>Disable automatic image loading to block tracking pixels and cut data usage.</p>
+      </div>
+    </div>
+
   </main>
 
   <footer>
