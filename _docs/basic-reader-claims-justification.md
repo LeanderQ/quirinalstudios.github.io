@@ -104,6 +104,57 @@ claim — it just describes the feature. The tag is inconsistent with the copy.
 
 ---
 
+---
+
+## 4. iCloud Sync
+
+**Claim:** iCloud sync requires a paid account in competing apps.
+
+**Evidence:**
+- **Inoreader** — Cross-device sync is tied to having an Inoreader account; meaningful
+  sync (rules, read status across devices) requires the Pro plan ($7.99/month).
+  Free accounts have limited retention and sync capabilities.
+- **Basic Reader** — Uses SwiftData CloudKit mirroring (cloudKitDatabase: .automatic)
+  and NSUbiquitousKeyValueStore for preferences. Syncs feeds, folders, filter rules,
+  read status, starred articles, and 7 preference keys. Requires only an Apple ID
+  — no new account.
+  Source: confirmed in BasicReader.entitlements and BasicReaderApp.swift (June 2026)
+
+**Confidence: Medium** (Inoreader's free sync limitations are documented; recommend
+verifying exact free-tier sync scope before launch)
+
+---
+
+## 5. Semantic Search
+
+**Claim:** On-device semantic search is a paid feature in competing apps.
+
+**Evidence:**
+- **Readwise Reader** — Offers semantic/natural language search at $7.99/month.
+  Uses cloud-based AI (not on-device).
+- **Basic Reader** — Uses Apple's NLContextualEmbedding (BERT-based) via the
+  NaturalLanguage framework. Embeddings are pre-computed on-device after each
+  refresh and cached to disk. Search uses a two-phase approach: instant word-match
+  results on each keystroke, then a 300ms debounced semantic pass re-ranking via
+  cosine similarity (Accelerate). Fully on-device — no content leaves the device.
+  Source: confirmed in SearchService.swift (June 2026)
+
+**Confidence: High** (implementation verified in code; Readwise pricing verified)
+
+---
+
+## Privacy — iCloud Correction
+
+The page previously stated "All your data lives on your device." This was corrected
+after iCloud sync shipped. Accurate statement: data lives on-device and in the
+user's own iCloud account — not on Quirinal Studios servers (which don't exist).
+
+Updated copy:
+- Privacy section intro: "...in your own iCloud account — never on ours."
+- "Stored Locally" card renamed to "Your Data, Your Cloud" with corrected copy.
+
+---
+
 ## Summary
 
 | # | Feature | Tag Supported? | Primary Source |
@@ -111,11 +162,11 @@ claim — it just describes the feature. The tag is inconsistent with the copy.
 | 1 | Content Filter Rules | ✅ Yes | Inoreader pricing page |
 | 2 | Background Refresh | ✅ Yes (with iOS caveat) | Inoreader pricing page |
 | 3 | OPML Import & Export | ⚠️ Partial | Inoreader (automatic backup only) |
-| 4 | Unread Count Badge | ❌ Not verified | — |
-| 5 | In-App Browser | ❌ Not verified | — |
+| 4 | iCloud Sync | ⚠️ Medium | Inoreader free-tier limitations |
+| 5 | Semantic Search | ✅ Yes | Readwise Reader pricing; code verified |
 
 ## To do before launch
 - [ ] Re-verify Inoreader pricing at inoreader.com/pricing
 - [ ] Verify Feedly pricing at feedly.com/plans
-- [ ] Resolve claims #4 and #5 — find evidence or change/remove the tags
+- [ ] Confirm exact scope of Inoreader free-tier sync
 - [ ] Confirm iOS background refresh intervals are achievable as claimed
