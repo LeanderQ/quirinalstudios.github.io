@@ -240,6 +240,19 @@
     .feature h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 6px; }
     .feature p { font-size: 0.85rem; color: var(--muted); line-height: 1.5; }
 
+    .group-heading {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-top: 32px;
+      margin-bottom: 4px;
+    }
+
+    .group-subtext {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
     /* ── Paywalled comparison list ── */
     .paywall-list {
       margin-top: 28px;
@@ -368,8 +381,8 @@
     <div class="free-callout-inner">
       <span class="check">✦</span>
       <div>
-        <h2>Everything included. No subscription, ever.</h2>
-        <p>Inoreader and Feedly charge for features like filter rules or folders. Basic Reader ships all of it included — because these are table stakes, not premium add-ons.</p>
+        <h2>One purchase. No subscription, ever.</h2>
+        <p>Inoreader's free tier has no filter rules at all — Pro is required. Feedly gates keyword filtering the same way. Basic Reader unlocks filter rules, semantic search, iCloud sync, and more with a single one-time purchase — no recurring bill, ever.</p>
       </div>
     </div>
   </div>
@@ -386,22 +399,9 @@
     <h2 class="section-title">Everything you need. Nothing you don't.</h2>
     <p class="section-body">Basic Reader strips RSS reading down to what matters: fast, clean access to the content you follow — without any of the bloat, dark patterns, or monthly bills that have crept into the category.</p>
 
+    <h3 class="group-heading">Included in every download</h3>
+
     <div class="features">
-      <div class="feature">
-        <div class="icon">🔎</div>
-        <h3>Semantic Search</h3>
-        <p>Search across all your articles instantly. Results are re-ranked using an on-device AI model for semantic relevance — so you find what you mean, not just what you typed. Nothing leaves your device.</p>
-      </div>
-      <div class="feature">
-        <div class="icon">☁️</div>
-        <h3>iCloud Sync</h3>
-        <p>Feeds, folders, filter rules, read status, and preferences sync automatically across all your devices via iCloud — no account required beyond your Apple ID.</p>
-      </div>
-      <div class="feature">
-        <div class="icon">🔍</div>
-        <h3>Powerful Filter Rules</h3>
-        <p>Hide the noise with wildcard or regex filters, applied globally, per folder, or per feed — against titles, summaries, or both. A filtered indicator shows when rules are active.</p>
-      </div>
       <div class="feature">
         <div class="icon">🗂</div>
         <h3>Folders & Organization</h3>
@@ -444,6 +444,37 @@
       </div>
     </div>
 
+    <h3 class="group-heading">Unlocked with one purchase</h3>
+    <p class="group-subtext">A single one-time purchase — never a subscription — unlocks everything below.</p>
+
+    <div class="features">
+      <div class="feature">
+        <div class="icon">🔎</div>
+        <h3>Semantic Search</h3>
+        <p>Search across all your articles instantly. Results are re-ranked using an on-device AI model for semantic relevance — so you find what you mean, not just what you typed. Nothing leaves your device.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">☁️</div>
+        <h3>iCloud Sync</h3>
+        <p>Feeds, folders, filter rules, read status, and preferences sync automatically across all your devices via iCloud — no account required beyond your Apple ID.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">🔍</div>
+        <h3>Powerful Filter Rules</h3>
+        <p>Hide the noise with wildcard or regex filters, applied globally, per folder, or per feed — against titles, summaries, or both. A filtered indicator shows when rules are active.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">🗞</div>
+        <h3>Timeline</h3>
+        <p>See every unread article across all your feeds in one place — sorted, filtered, and searchable just like any other view.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">🖼</div>
+        <h3>Article View Styles</h3>
+        <p>Browse your feeds as a list, compact thumbnails, or full image cards — switch anytime from Settings.</p>
+      </div>
+    </div>
+
     <!-- ── Second screenshot ── -->
     <div class="screenshot-block" style="margin-top: 32px; aspect-ratio: 4/3;">
       <img src="3-col layout Large.png" alt="Basic Reader three-column layout on iPad" style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain;" />
@@ -452,22 +483,22 @@
     <!-- ── Paywall comparison ── -->
     <p class="section-label">Included vs. the competition</p>
     <h2 class="section-title">Subscription elsewhere. Included here.</h2>
-    <p class="section-body">Popular RSS apps routinely charge $8–10/month for features that should come standard. Here's what Basic Reader includes — no subscription required.</p>
+    <p class="section-body">Popular RSS apps routinely charge $8–10/month for features that should come standard. Here's how Basic Reader compares — everything below comes from a single one-time purchase, never a subscription.</p>
 
     <div class="paywall-list">
       <div class="paywall-item">
         <span class="tag-locked">Subscription elsewhere</span>
         <div>
           <h3>Content Filter Rules</h3>
-          <p>Wildcard and regex filters that hide articles by title or summary, scoped to any feed or folder. Inoreader locks filter rules to their Pro plan ($7.99/month). Basic Reader: included.</p>
+          <p>Wildcard and regex filters that hide articles by title or summary, scoped to any feed or folder. Inoreader's free tier has no rules or filters at all — Pro is required ($7.50/month, billed annually). Basic Reader: included in the one-time purchase.</p>
         </div>
-        <span class="tag-free">Included</span>
+        <span class="tag-free">One-time purchase</span>
       </div>
       <div class="paywall-item">
         <span class="tag-locked">Subscription elsewhere</span>
         <div>
           <h3>Automatic Background Refresh</h3>
-          <p>Feeds refresh automatically on a configurable schedule, based on iOS limitations, while the app is in the background. Inoreader's free tier uses a throttled refresh rate; guaranteed fast refresh is Pro-only ($7.99/month).</p>
+          <p>Feeds refresh automatically on a configurable schedule, based on iOS limitations, while the app is in the background. Inoreader's free tier has no guaranteed refresh rate; guaranteed hourly refresh is Pro-only ($7.50/month, billed annually).</p>
         </div>
         <span class="tag-free">Included</span>
       </div>
@@ -483,17 +514,17 @@
         <span class="tag-locked">Subscription elsewhere</span>
         <div>
           <h3>iCloud Sync</h3>
-          <p>Feeds, folders, filter rules, read status, and starred articles sync across all your devices via iCloud. Inoreader requires a paid account for cross-device sync. Basic Reader uses your existing Apple ID — no new account needed.</p>
+          <p>Feeds, folders, filter rules, read status, and starred articles sync across all your devices via iCloud. Inoreader's own FAQ states an active subscription is required to use their iOS and Android apps. Basic Reader uses your existing Apple ID — no new account, no subscription, just the one-time purchase.</p>
         </div>
-        <span class="tag-free">Included</span>
+        <span class="tag-free">One-time purchase</span>
       </div>
       <div class="paywall-item">
         <span class="tag-locked">Subscription elsewhere</span>
         <div>
           <h3>Semantic Search</h3>
-          <p>Search finds what you mean, not just what you typed — powered by an on-device AI model. Readwise Reader offers semantic search at $7.99/month. Basic Reader runs it entirely on your device, for free.</p>
+          <p>Search finds what you mean, not just what you typed — powered by an on-device AI model. Readwise Reader bundles semantic search into its $9.99/month (billed annually) plan. Basic Reader runs it entirely on your device, included in the one-time purchase — never a recurring bill.</p>
         </div>
-        <span class="tag-free">Included</span>
+        <span class="tag-free">One-time purchase</span>
       </div>
     </div>
 
