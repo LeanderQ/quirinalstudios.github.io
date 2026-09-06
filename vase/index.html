@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Manuscript app — early look</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --g900:#161D23; --g850:#1A2229; --g800:#232E37; --g750:#2A3641;
+  --rule:#3D4B57; --rule-soft:#2C3841;
+  --vellum:#E4D5B4; --chalk:#E9EDEF; --verdigris:#74AC97;
+  --gilt:#C9973F; --indigo:#8AA9D8;
+  --mute:#8195A3; --dim:#5F7180;
+  --serif:'EB Garamond',Georgia,serif;
+  --sans:'IBM Plex Sans',system-ui,-apple-system,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--g900);color:var(--chalk);font-family:var(--sans);font-size:16px;line-height:1.6}
+.wrap{max-width:720px;margin:0 auto;padding:0 20px}
+img,svg{max-width:100%}
+
+/* intro */
+.top{padding:56px 0 40px}
+.top h1{font-family:var(--serif);font-weight:500;font-size:40px;line-height:1.08;margin:0 0 18px;letter-spacing:-.01em}
+.top p{font-size:17px;color:var(--mute);line-height:1.7;margin:0 0 14px}
+.top p strong{color:var(--chalk);font-weight:500}
+
+.howto{
+  border:1px solid var(--rule-soft);border-radius:8px;background:var(--g850);
+  padding:18px 20px;margin:28px 0 0;
+}
+.howto h2{font-size:14px;font-weight:600;margin:0 0 10px;color:var(--chalk);font-family:var(--sans);letter-spacing:0}
+.howto p{font-size:14.5px;color:var(--mute);margin:0 0 8px;line-height:1.65}
+.howto p:last-child{margin-bottom:0}
+
+/* sections */
+section{padding:44px 0;border-top:1px solid var(--rule-soft)}
+h2{font-family:var(--serif);font-weight:500;font-size:27px;line-height:1.2;margin:0 0 12px}
+.lede{font-size:15.5px;color:var(--mute);line-height:1.7;margin:0 0 24px}
+
+/* question block */
+.q{
+  border-left:2px solid var(--gilt);padding:12px 0 12px 16px;margin:22px 0 0;
+}
+.q .n{font-family:var(--mono);font-size:11px;color:var(--gilt);letter-spacing:.06em;display:block;margin-bottom:5px}
+.q p{margin:0;font-size:15.5px;color:var(--chalk);line-height:1.6}
+.q p + p{margin-top:7px;color:var(--mute);font-size:14.5px}
+
+/* stop bar */
+.stop{
+  margin:40px 0 0;padding:22px;border:1px dashed var(--rule);border-radius:8px;
+  background:var(--g850);text-align:center;
+}
+.stop p{margin:0;font-size:15px;color:var(--vellum);line-height:1.6}
+.stop p + p{margin-top:8px;color:var(--mute);font-size:14px}
+
+/* device */
+.device{background:var(--g850);border:1px solid var(--rule);border-radius:12px;overflow:hidden;box-shadow:0 18px 44px -18px rgba(0,0,0,.7)}
+.cap{font-family:var(--mono);font-size:11px;color:var(--dim);margin:11px 0 0;letter-spacing:.04em}
+
+.appbar{display:flex;align-items:center;gap:10px;padding:10px 13px;background:var(--g800);border-bottom:1px solid var(--rule-soft)}
+.crumb{font-size:12.5px;color:var(--mute);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.crumb b{color:var(--chalk);font-weight:600}
+.folio{font-family:var(--mono);font-size:10.5px;color:var(--vellum);background:rgba(228,213,180,.09);padding:3px 7px;border-radius:4px;border:1px solid rgba(228,213,180,.18);flex:none}
+.spring{flex:1}
+.ib{width:27px;height:27px;border-radius:6px;border:1px solid var(--rule-soft);background:var(--g750);color:var(--mute);display:grid;place-items:center;font-size:12px;flex:none;cursor:pointer}
+
+.panes{display:flex;flex-direction:column}
+.anchor{background:var(--g900);border-bottom:1px solid var(--rule-soft);padding:13px}
+.appar{padding:14px;background:var(--g850)}
+.plabel{font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;color:var(--dim);margin-bottom:7px}
+
+.folioimg{background:#0F1418;border:1px solid var(--rule-soft);border-radius:5px;padding:8px}
+.folioimg svg{display:block;width:100%;height:auto}
+.fnav{display:flex;align-items:center;justify-content:center;gap:9px;margin-top:9px}
+.fnav button{background:var(--g750);border:1px solid var(--rule-soft);color:var(--mute);border-radius:5px;padding:4px 11px;font-size:12px;cursor:pointer;font-family:var(--sans)}
+.fnav .pos{font-family:var(--mono);font-size:10.5px;color:var(--dim)}
+
+/* views bar */
+.views{display:flex;gap:6px;align-items:center;padding-bottom:12px;border-bottom:1px solid var(--rule-soft);margin-bottom:14px;flex-wrap:wrap}
+.views .lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;color:var(--dim);margin-right:2px}
+.view{background:transparent;border:1px solid var(--rule-soft);color:var(--mute);border-radius:15px;padding:6px 13px;font-size:12.5px;cursor:pointer;font-family:var(--sans);transition:all .14s}
+.view[aria-pressed="true"]{background:var(--vellum);color:var(--g900);border-color:var(--vellum);font-weight:600}
+
+.layers{display:flex;flex-direction:column;gap:10px}
+.layer{border:1px solid var(--rule-soft);border-left:2px solid var(--c,var(--rule));border-radius:5px;background:var(--g800);padding:11px 13px}
+.layer[hidden]{display:none}
+.lhead{display:flex;align-items:baseline;gap:8px;margin-bottom:6px;flex-wrap:wrap}
+.ltype{font-family:var(--mono);font-size:9.5px;letter-spacing:.09em;color:var(--c,var(--mute))}
+.lby{font-size:11px;color:var(--dim)}
+.lby b{color:var(--mute);font-weight:500}
+.ltext{font-family:var(--serif);font-size:16px;line-height:1.6;color:var(--chalk);margin:0}
+.ltext.orig{font-style:italic;color:var(--vellum);font-size:15.5px}
+.ltext.sm{font-size:15px}
+mark.anch{background:rgba(138,169,216,.16);color:var(--chalk);border-bottom:1.5px solid var(--indigo);padding:0 1px;border-radius:2px}
+
+.layer.locked{background:repeating-linear-gradient(-45deg,var(--g800),var(--g800) 9px,var(--g850) 9px,var(--g850) 18px)}
+.bl{height:8px;background:var(--rule-soft);border-radius:3px;margin:6px 0}
+.bl.a{width:94%}.bl.b{width:78%}.bl.c{width:58%}
+.unlock{margin-top:9px;background:var(--gilt);color:#231703;border:none;border-radius:5px;padding:6px 13px;font-size:12px;font-weight:600;cursor:pointer;font-family:var(--sans)}
+
+.rels{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}
+.rel{font-size:11.5px;color:var(--mute);background:var(--g750);border:1px solid var(--rule-soft);border-radius:4px;padding:3px 8px}
+.rel b{color:var(--vellum);font-weight:500}
+
+.pips{display:flex;gap:6px;flex-wrap:wrap;margin-top:3px}
+.pip{font-family:var(--mono);font-size:10px;padding:3px 7px;border-radius:4px;border:1px solid var(--rule-soft);color:var(--mute);background:var(--g750)}
+.pip.cur{background:var(--vellum);color:var(--g900);border-color:var(--vellum);font-weight:500}
+.pip.no{opacity:.35;text-decoration:line-through}
+
+/* comparison */
+.cols{display:flex;gap:1px;background:var(--rule-soft);overflow-x:auto;-webkit-overflow-scrolling:touch}
+.col{background:var(--g850);padding:12px;min-width:172px;flex:1}
+.colh{display:flex;align-items:baseline;justify-content:space-between;gap:6px;padding-bottom:8px;margin-bottom:10px;border-bottom:1px solid var(--rule-soft)}
+.colh .nm{font-size:12.5px;font-weight:600;color:var(--chalk)}
+.colh .fl{font-family:var(--mono);font-size:9.5px;color:var(--dim)}
+.thumb{background:#0F1418;border:1px solid var(--rule-soft);border-radius:4px;padding:6px;margin-bottom:9px}
+.ctext{font-family:var(--serif);font-size:14px;line-height:1.5;color:var(--vellum);font-style:italic;margin:0}
+.cdiff{margin-top:8px;font-size:11px;color:var(--verdigris);line-height:1.5}
+
+/* composer */
+.composer{border:1px solid var(--indigo);border-radius:6px;background:var(--g800);padding:12px 14px}
+.ch{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+.apill{font-size:11px;color:var(--indigo);background:rgba(138,169,216,.13);border:1px solid rgba(138,169,216,.3);border-radius:12px;padding:2px 9px}
+.composer textarea{width:100%;background:var(--g850);border:1px solid var(--rule-soft);border-radius:5px;color:var(--chalk);font-family:var(--serif);font-size:15.5px;line-height:1.55;padding:10px 11px;resize:vertical;min-height:70px}
+.composer textarea:focus{outline:none;border-color:var(--indigo)}
+.crow{display:flex;align-items:center;gap:7px;margin-top:9px;flex-wrap:wrap}
+.vis{background:var(--g750);border:1px solid var(--rule-soft);color:var(--mute);border-radius:4px;padding:4px 10px;font-size:11.5px;cursor:pointer;font-family:var(--sans)}
+.vis[aria-pressed="true"]{border-color:var(--indigo);color:var(--indigo)}
+.save{margin-left:auto;background:var(--indigo);color:var(--g900);border:none;border-radius:5px;padding:6px 15px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:var(--sans)}
+
+/* search */
+.sbox{display:flex;align-items:center;gap:9px;background:var(--g800);border:1px solid var(--rule);border-radius:7px;padding:10px 13px;margin-bottom:12px}
+.sbox input{flex:1;background:transparent;border:none;color:var(--chalk);font-family:var(--sans);font-size:15px;outline:none;min-width:0}
+.facets{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.facet{font-size:11.5px;color:var(--mute);background:var(--g800);border:1px solid var(--rule-soft);border-radius:14px;padding:4px 11px;cursor:pointer;font-family:var(--sans)}
+.facet[aria-pressed="true"]{border-color:var(--vellum);color:var(--vellum)}
+.res{border-bottom:1px solid var(--rule-soft);padding:13px 0}
+.res:last-child{border-bottom:none}
+.rh{display:flex;align-items:baseline;gap:8px;margin-bottom:5px;flex-wrap:wrap}
+.rh .t{font-size:14px;font-weight:600;color:var(--chalk)}
+.rh .w{font-family:var(--mono);font-size:10px;color:var(--dim)}
+.rs{font-family:var(--serif);font-size:14.5px;line-height:1.55;color:var(--mute);margin:0}
+.rs em{font-style:normal;background:rgba(228,213,180,.18);color:var(--vellum);padding:0 2px}
+.rm{display:flex;gap:5px;margin-top:7px;flex-wrap:wrap}
+.tag{font-family:var(--mono);font-size:9.5px;padding:2px 6px;border-radius:3px;border:1px solid var(--rule-soft);color:var(--dim)}
+.tag.g{color:var(--gilt);border-color:rgba(201,151,63,.4)}
+.tag.i{color:var(--indigo);border-color:rgba(138,169,216,.4)}
+
+/* floor mode */
+.floor{background:#0D1216;padding:22px 20px}
+.floor .fl-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.floor .fl-t{font-size:13px;color:var(--dim);font-family:var(--mono);letter-spacing:.06em}
+.floor .fl-img{background:#141A1F;border:1px solid var(--rule-soft);border-radius:6px;padding:10px;margin-bottom:16px}
+.floor .fl-img svg{display:block;width:100%;height:auto}
+.floor h4{font-family:var(--serif);font-size:22px;font-weight:500;color:var(--vellum);margin:0 0 10px;line-height:1.3}
+.floor p{font-family:var(--serif);font-size:19px;line-height:1.5;color:var(--chalk);margin:0}
+.floor .fl-note{margin-top:14px;padding-top:14px;border-top:1px solid var(--rule-soft);font-size:17px;color:var(--indigo);font-family:var(--serif);line-height:1.5}
+.floor .fl-nav{display:flex;gap:9px;margin-top:20px}
+.floor .fl-nav button{flex:1;background:var(--g750);border:1px solid var(--rule);color:var(--mute);border-radius:7px;padding:13px;font-size:15px;cursor:pointer;font-family:var(--sans)}
+
+/* collection */
+.coll{display:flex;flex-direction:column;gap:9px}
+.citem{display:flex;align-items:center;gap:11px;border:1px solid var(--rule-soft);border-radius:6px;background:var(--g800);padding:10px 12px}
+.cthumb{width:44px;height:34px;background:#0F1418;border:1px solid var(--rule-soft);border-radius:4px;flex:none;overflow:hidden}
+.cthumb svg{display:block;width:100%;height:100%}
+.cbody{min-width:0;flex:1}
+.cbody .ct{font-size:13.5px;color:var(--chalk);font-weight:500}
+.cbody .cm{font-family:var(--mono);font-size:10px;color:var(--dim);margin-top:2px}
+.cgrip{color:var(--dim);font-size:15px;flex:none}
+
+.legend{display:flex;flex-wrap:wrap;gap:7px;margin:18px 0 0}
+.chip{display:inline-flex;align-items:center;gap:7px;padding:6px 12px 6px 9px;background:var(--g800);border:1px solid var(--rule-soft);border-radius:20px;font-size:12px;color:var(--mute)}
+.chip i{width:8px;height:8px;border-radius:50%;flex:none}
+
+.end{padding:44px 0 72px;border-top:1px solid var(--rule-soft)}
+.end p{font-size:14.5px;color:var(--dim);line-height:1.7;margin:0 0 12px}
+
+@media (min-width:760px){
+  .top h1{font-size:50px}
+  .panes.wide{flex-direction:row}
+  .panes.wide .anchor{flex:0 0 44%;border-bottom:none;border-right:1px solid var(--rule-soft)}
+  .panes.wide .appar{flex:1;min-width:0}
+}
+</style>
+
+<div class="wrap">
+
+<div class="top">
+  <h1>An app for reading the manuscripts. Early sketch.</h1>
+  <p>I've been putting together an idea for an iOS app for studying and training from the source manuscripts — Fiore to start with, but built so other treatises can go in later. Nothing is built yet. These are clickable sketches, not a working app.</p>
+  <p>I'd rather find out now if this is useful or if I'm designing something only I want. <strong>Blunt is more useful than kind here.</strong></p>
+
+  <div class="howto">
+    <h2>How to reply</h2>
+    <p>There are numbered questions throughout. Answer any of them in the chat — just the number and a few words is perfect. <em>"6 — I'd never use that"</em> is a genuinely useful reply.</p>
+    <p>Ignore the ones you don't care about. You don't need to go in order, and you don't need to be nice about it.</p>
+    <p>Some things are tappable. The Italian text is placeholder — don't read it for accuracy, I've not transcribed anything properly yet.</p>
+  </div>
+</div>
+
+<!-- ===== BEFORE ===== -->
+<section>
+  <h2>Before you scroll</h2>
+  <p class="lede">These four are about what you already do. They're the most useful answers I can get, and seeing the sketches first will change how you answer them — so if you can, do these before scrolling on.</p>
+
+  <div class="q"><span class="n">01</span>
+    <p>Last time you sat down to work through a play on your own — what did you actually have open?</p>
+    <p>Book, laptop, phone, printouts, Wiktenauer, all of it at once?</p>
+  </div>
+
+  <div class="q"><span class="n">02</span>
+    <p>Do you keep notes on your own interpretations? Where do they live?</p>
+    <p>Notebook, doc, phone notes, nowhere in particular — all fine answers.</p>
+  </div>
+
+  <div class="q"><span class="n">03</span>
+    <p>Have you ever gone looking for a note or an idea you'd had before, and not found it again?</p>
+  </div>
+
+  <div class="q"><span class="n">04</span>
+    <p>When you want to see how a different copy shows something, what do you do?</p>
+    <p>And roughly how often do you think "not worth the hassle" and skip it?</p>
+  </div>
+
+  <div class="stop">
+    <p>That's the part I most want answers to.</p>
+    <p>Everything below is the sketch itself.</p>
+  </div>
+</section>
+
+<!-- ===== READING ===== -->
+<section>
+  <h2>Reading a play</h2>
+  <p class="lede">The idea is that the manuscript stays on screen at all times, and everything else — original text, translation, your own notes, the other copies — sits alongside it. Tap a play on the page to move between them.</p>
+
+  <div class="device">
+    <div class="appbar">
+      <div class="crumb"><b>Fior di Battaglia</b> · Getty · Zogho largo</div>
+      <span class="folio">f 26v</span>
+      <div class="spring"></div>
+      <button class="ib" title="Compare">⧉</button>
+      <button class="ib" title="Search">⌕</button>
+    </div>
+    <div class="panes wide">
+      <div class="anchor">
+        <div class="plabel">GETTY MS LUDWIG XV 13</div>
+        <div class="folioimg">
+          <svg viewBox="0 0 300 380" role="img" aria-label="Schematic manuscript page with three plays">
+            <rect width="300" height="380" fill="#1C1A15"/>
+            <rect x="6" y="6" width="288" height="368" fill="#2A2519" stroke="#3A3324"/>
+            <g class="reg on" data-r="1" style="cursor:pointer">
+              <circle cx="80" cy="52" r="11" fill="#6E6248"/><rect x="72" y="64" width="17" height="34" rx="5" fill="#6E6248"/>
+              <circle cx="140" cy="52" r="11" fill="#5A5140"/><rect x="132" y="64" width="17" height="34" rx="5" fill="#5A5140"/>
+              <line x1="88" y1="62" x2="146" y2="84" stroke="#9A8C66" stroke-width="2.5"/>
+              <line x1="132" y1="62" x2="76" y2="86" stroke="#9A8C66" stroke-width="2.5"/>
+              <path d="M74 34 l6 -9 l6 9 z" fill="#C9973F"/>
+              <text x="24" y="118" fill="#7A6E52" font-family="monospace" font-size="8">placeholder text line</text>
+              <rect class="hit" x="16" y="20" width="268" height="108" rx="4" fill="transparent" stroke="transparent" stroke-width="2"/>
+            </g>
+            <g class="reg" data-r="2" style="cursor:pointer">
+              <circle cx="80" cy="176" r="11" fill="#6E6248"/><rect x="72" y="188" width="17" height="34" rx="5" fill="#6E6248"/>
+              <circle cx="140" cy="176" r="11" fill="#5A5140"/><rect x="132" y="188" width="17" height="34" rx="5" fill="#5A5140"/>
+              <line x1="88" y1="186" x2="146" y2="208" stroke="#9A8C66" stroke-width="2.5"/>
+              <circle cx="74" cy="160" r="5" fill="none" stroke="#C9973F" stroke-width="1.6"/>
+              <text x="24" y="242" fill="#7A6E52" font-family="monospace" font-size="8">placeholder text line</text>
+              <rect class="hit" x="16" y="144" width="268" height="108" rx="4" fill="transparent" stroke="transparent" stroke-width="2"/>
+            </g>
+            <g class="reg" data-r="3" style="cursor:pointer">
+              <circle cx="80" cy="300" r="11" fill="#6E6248"/><rect x="72" y="312" width="17" height="34" rx="5" fill="#6E6248"/>
+              <circle cx="140" cy="300" r="11" fill="#5A5140"/><rect x="132" y="312" width="17" height="34" rx="5" fill="#5A5140"/>
+              <line x1="132" y1="310" x2="76" y2="332" stroke="#9A8C66" stroke-width="2.5"/>
+              <text x="24" y="366" fill="#7A6E52" font-family="monospace" font-size="8">placeholder text line</text>
+              <rect class="hit" x="16" y="268" width="268" height="100" rx="4" fill="transparent" stroke="transparent" stroke-width="2"/>
+            </g>
+          </svg>
+        </div>
+        <div class="fnav"><button>‹ 26r</button><span class="pos">tap a play</span><button>27r ›</button></div>
+      </div>
+      <div class="appar">
+        <div class="views">
+          <span class="lbl">VIEW</span>
+          <button class="view" data-v="study" aria-pressed="true">Study</button>
+          <button class="view" data-v="plain" aria-pressed="false">Just translation</button>
+          <button class="view" data-v="mine" aria-pressed="false">My notes</button>
+        </div>
+        <div class="layers" id="L">
+          <div class="layer" data-l="orig" style="--c:var(--vellum)">
+            <div class="lhead"><span class="ltype">ORIGINAL</span><span class="lby">Getty f 26v · placeholder</span></div>
+            <p class="ltext orig">Questo è lo zogho stretto che nasce del crossare a tuta spada, e lo scolaro entra cum la sua spada sotto…</p>
+          </div>
+          <div class="layer" data-l="trans" style="--c:var(--chalk)">
+            <div class="lhead"><span class="ltype">TRANSLATION</span><span class="lby">by <b>M. Chidester</b> · free</span></div>
+            <p class="ltext">This is the close play that arises from the crossing at full sword. The scholar enters beneath with his sword and <mark class="anch">takes the opponent's grip</mark>, turning him so that he cannot recover.</p>
+            <div class="rels"><span class="rel"><b>countered by</b> → play 4</span><span class="rel"><b>remedy for</b> → master, 26r</span></div>
+          </div>
+          <div class="layer" data-l="mine" style="--c:var(--indigo)">
+            <div class="lhead"><span class="ltype">MY NOTE</span><span class="lby">on "takes the opponent's grip"</span></div>
+            <p class="ltext sm">Students reach too early here. Drill the entry from the bind, hands only, before adding the turn. Morgan shows the elbow much lower.</p>
+          </div>
+          <div class="layer locked" data-l="prem" style="--c:var(--gilt)">
+            <div class="lhead"><span class="ltype">TRANSLATION</span><span class="lby">by <b>Tom Leoni</b> · paid</span></div>
+            <div class="bl a"></div><div class="bl b"></div><div class="bl c"></div>
+            <button class="unlock">Unlock Leoni translation</button>
+          </div>
+          <div class="layer" data-l="wit" style="--c:var(--rule)">
+            <div class="lhead"><span class="ltype">OTHER COPIES</span><span class="lby">in 3 of 4</span></div>
+            <div class="pips"><span class="pip cur">Getty 26v</span><span class="pip">Morgan 8r</span><span class="pip">Pisani-Dossi 21b</span><span class="pip no">Paris</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="cap">Tap the plays on the page · switch views above the text</p>
+
+  <div class="legend">
+    <span class="chip"><i style="background:var(--vellum)"></i>Original</span>
+    <span class="chip"><i style="background:var(--chalk)"></i>Translation</span>
+    <span class="chip"><i style="background:var(--indigo)"></i>Your notes</span>
+    <span class="chip"><i style="background:var(--gilt)"></i>Paid</span>
+  </div>
+
+  <div class="q"><span class="n">05</span>
+    <p>Is the manuscript image the right size here?</p>
+    <p>Too small to be useful, about right, or do you want it much bigger with the text tucked away?</p>
+  </div>
+
+  <div class="q"><span class="n">06</span>
+    <p>Those three views at the top — which one would you actually live in?</p>
+    <p>Is switching between them something you'd bother doing, or would you set it once and forget?</p>
+  </div>
+
+  <div class="q"><span class="n">07</span>
+    <p>Free translations included, better ones as a paid unlock. Reasonable, or annoying?</p>
+  </div>
+</section>
+
+<!-- ===== COMPARE ===== -->
+<section>
+  <h2>Comparing the copies</h2>
+  <p class="lede">The same play across the copies that have it, side by side. Copies that don't contain it say so rather than showing a gap.</p>
+
+  <div class="device">
+    <div class="appbar">
+      <div class="crumb"><b>Zogho largo</b> · play 3</div>
+      <div class="spring"></div>
+      <button class="ib">✕</button>
+    </div>
+    <div class="cols">
+      <div class="col">
+        <div class="colh"><span class="nm">Getty</span><span class="fl">26v</span></div>
+        <div class="thumb"><svg viewBox="0 0 200 74"><rect width="200" height="74" fill="#1C1A15"/><circle cx="70" cy="26" r="8" fill="#6E6248"/><rect x="64" y="35" width="13" height="24" rx="4" fill="#6E6248"/><circle cx="118" cy="26" r="8" fill="#5A5140"/><rect x="112" y="35" width="13" height="24" rx="4" fill="#5A5140"/><line x1="77" y1="34" x2="124" y2="50" stroke="#9A8C66" stroke-width="2"/><path d="M64 13 l5 -7 l5 7 z" fill="#C9973F"/></svg></div>
+        <p class="ctext">Questo è lo zogho stretto che nasce del crossare…</p>
+        <p class="cdiff">Fullest text. Crown present.</p>
+      </div>
+      <div class="col">
+        <div class="colh"><span class="nm">Morgan</span><span class="fl">8r</span></div>
+        <div class="thumb"><svg viewBox="0 0 200 74"><rect width="200" height="74" fill="#1A1814"/><circle cx="70" cy="26" r="8" fill="#645A44"/><rect x="64" y="35" width="13" height="24" rx="4" fill="#645A44"/><circle cx="118" cy="26" r="8" fill="#544C3C"/><rect x="112" y="35" width="13" height="24" rx="4" fill="#544C3C"/><line x1="77" y1="36" x2="124" y2="52" stroke="#B9B2A4" stroke-width="2"/><path d="M64 13 l5 -7 l5 7 z" fill="#C9973F"/></svg></div>
+        <p class="ctext">Questo zogho stretto nasce del crossar a tuta spada…</p>
+        <p class="cdiff">Silvered weapons. Elbow lower.</p>
+      </div>
+      <div class="col">
+        <div class="colh"><span class="nm">Pisani-Dossi</span><span class="fl">21b</span></div>
+        <div class="thumb"><svg viewBox="0 0 200 74"><rect width="200" height="74" fill="#201D17"/><circle cx="70" cy="26" r="8" fill="#5C5340"/><rect x="64" y="35" width="13" height="24" rx="4" fill="#5C5340"/><circle cx="118" cy="26" r="8" fill="#4E4636"/><rect x="112" y="35" width="13" height="24" rx="4" fill="#4E4636"/><line x1="77" y1="34" x2="124" y2="50" stroke="#8A7E5E" stroke-width="2"/></svg></div>
+        <p class="ctext">Per crossar a tuta spada in zogho stretto vegno…</p>
+        <p class="cdiff">Couplet only. No crown.</p>
+      </div>
+      <div class="col" style="opacity:.5">
+        <div class="colh"><span class="nm">Paris</span><span class="fl">—</span></div>
+        <p class="ctext" style="font-style:normal;font-family:var(--sans);font-size:12.5px;color:var(--dim)">Not in this copy.</p>
+      </div>
+    </div>
+  </div>
+  <p class="cap">Scroll sideways · comparison as a view you switch into</p>
+
+  <div class="q"><span class="n">08</span>
+    <p>Honestly — would you use this often, occasionally, or basically never?</p>
+    <p>I use it a lot, which makes me a bad judge of whether it matters to anyone else.</p>
+  </div>
+</section>
+
+<!-- ===== NOTES ===== -->
+<section>
+  <h2>Your own notes</h2>
+  <p class="lede">Select a phrase in the translation and write against it. The note stays attached to that passage and comes back whenever you return to it. Searchable alongside everything else.</p>
+
+  <div class="device" style="padding:15px">
+    <div class="layer" style="--c:var(--chalk);margin-bottom:11px">
+      <div class="lhead"><span class="ltype">TRANSLATION</span><span class="lby">by <b>M. Chidester</b></span></div>
+      <p class="ltext">The scholar enters beneath with his sword and <mark class="anch">takes the opponent's grip</mark>, turning him so that he cannot recover.</p>
+    </div>
+    <div class="composer">
+      <div class="ch"><span class="ltype" style="--c:var(--indigo)">MY NOTE</span><span class="apill">↳ "takes the opponent's grip"</span></div>
+      <textarea>Students reach too early here. Drill the entry from the bind, hands only, before adding the turn.</textarea>
+      <div class="crow">
+        <button class="vis" aria-pressed="true">Private</button>
+        <button class="vis" aria-pressed="false">Share</button>
+        <button class="save">Save</button>
+      </div>
+    </div>
+  </div>
+  <p class="cap">Notes attach to a passage, not just a page</p>
+
+  <div class="q"><span class="n">09</span>
+    <p>Would you actually write notes in here, or keep using whatever you use now?</p>
+    <p>If not — what would stop you? Trust, effort, habit, something else?</p>
+  </div>
+</section>
+
+<!-- ===== SEARCH ===== -->
+<section>
+  <h2>Finding things again</h2>
+  <p class="lede">Search across the original text, the translations, and your own notes at once. Spelling varies wildly in the sources, so <em>presa</em>, <em>prexa</em> and <em>preſa</em> would all need to come back from one search.</p>
+
+  <div class="device" style="padding:15px">
+    <div class="sbox"><span style="color:var(--dim)">⌕</span><input value="presa / grip" readonly aria-label="Search"><span style="font-family:var(--mono);font-size:10.5px;color:var(--dim)">28</span></div>
+    <div class="facets">
+      <button class="facet" aria-pressed="true">Everything</button>
+      <button class="facet" aria-pressed="false">Longsword</button>
+      <button class="facet" aria-pressed="false">My notes</button>
+    </div>
+    <div class="res">
+      <div class="rh"><span class="t">Zogho stretto, play 3</span><span class="w">3 copies</span></div>
+      <p class="rs">The scholar enters beneath and takes the opponent's <em>grip</em>, turning him so he cannot recover.</p>
+      <div class="rm"><span class="tag">Getty 26v</span><span class="tag">Morgan 8r</span><span class="tag i">your note</span></div>
+    </div>
+    <div class="res">
+      <div class="rh"><span class="t">Abrazare, play 6</span><span class="w">2 copies</span></div>
+      <p class="rs">Spelled <em>presa</em> · <em>prexa</em> · <em>preſa</em> across the copies — all found</p>
+      <div class="rm"><span class="tag">Getty 6v</span><span class="tag g">2 in Leoni — locked</span></div>
+    </div>
+  </div>
+
+  <div class="q"><span class="n">10</span>
+    <p>What's the first thing you'd type into that box?</p>
+    <p>Genuinely curious — it tells me what to make sure works.</p>
+  </div>
+</section>
+
+<!-- ===== FLOOR ===== -->
+<section>
+  <h2>During class</h2>
+  <p class="lede">I always see people with books propped open, moving back and forth to check something. This is a stripped-back view for a phone or tablet propped on a bench — big type, no clutter, one play at a time, thumb-sized buttons.</p>
+
+  <div class="device">
+    <div class="floor">
+      <div class="fl-top">
+        <span class="fl-t">ZOGHO LARGO · 3 OF 7</span>
+        <button class="ib">✕</button>
+      </div>
+      <div class="fl-img">
+        <svg viewBox="0 0 300 120" role="img" aria-label="Single play, enlarged">
+          <rect width="300" height="120" fill="#1C1A15"/>
+          <circle cx="108" cy="44" r="12" fill="#7A6C50"/><rect x="99" y="57" width="19" height="38" rx="5" fill="#7A6C50"/>
+          <circle cx="172" cy="44" r="12" fill="#635947"/><rect x="163" y="57" width="19" height="38" rx="5" fill="#635947"/>
+          <line x1="117" y1="55" x2="180" y2="79" stroke="#A99A72" stroke-width="3"/>
+          <line x1="163" y1="55" x2="104" y2="81" stroke="#A99A72" stroke-width="3"/>
+          <path d="M100 25 l7 -10 l7 10 z" fill="#C9973F"/>
+        </svg>
+      </div>
+      <h4>Third play of the close game</h4>
+      <p>Enter beneath with the sword and take his grip, turning him so he cannot recover.</p>
+      <div class="fl-note">Reach too early and you lose the bind. Hands only first.</div>
+      <div class="fl-nav"><button>‹ Previous</button><button>Next ›</button></div>
+    </div>
+  </div>
+  <p class="cap">Propped-device view · large type, two big buttons</p>
+
+  <div class="q"><span class="n">11</span>
+    <p>Would you ever prop a phone or tablet up during a class like this?</p>
+    <p>Or is a book on the bench just better and I should drop this entirely?</p>
+  </div>
+</section>
+
+<!-- ===== COLLECTION ===== -->
+<section>
+  <h2>Pulling plays together</h2>
+  <p class="lede">Rather than a full lesson planner, just a loose collection — plays you want to cover, gathered under a heading, in no particular order. Dip in and out rather than work through it.</p>
+
+  <div class="device" style="padding:15px">
+    <div style="font-size:13.5px;color:var(--chalk);font-weight:600;margin-bottom:3px">Binding and entries</div>
+    <div style="font-family:var(--mono);font-size:10.5px;color:var(--dim);margin-bottom:13px">6 plays · 3 with notes</div>
+    <div class="coll">
+      <div class="citem">
+        <div class="cthumb"><svg viewBox="0 0 60 46"><rect width="60" height="46" fill="#1C1A15"/><circle cx="22" cy="16" r="6" fill="#6E6248"/><circle cx="40" cy="16" r="6" fill="#5A5140"/><line x1="26" y1="22" x2="44" y2="32" stroke="#9A8C66" stroke-width="2"/></svg></div>
+        <div class="cbody"><div class="ct">Zogho stretto, play 3</div><div class="cm">GETTY 26v · has note</div></div>
+        <span class="cgrip">⋮⋮</span>
+      </div>
+      <div class="citem">
+        <div class="cthumb"><svg viewBox="0 0 60 46"><rect width="60" height="46" fill="#1A1814"/><circle cx="22" cy="16" r="6" fill="#645A44"/><circle cx="40" cy="16" r="6" fill="#544C3C"/><line x1="26" y1="24" x2="44" y2="34" stroke="#B9B2A4" stroke-width="2"/></svg></div>
+        <div class="cbody"><div class="ct">First master of the close game</div><div class="cm">GETTY 26r</div></div>
+        <span class="cgrip">⋮⋮</span>
+      </div>
+      <div class="citem">
+        <div class="cthumb"><svg viewBox="0 0 60 46"><rect width="60" height="46" fill="#201D17"/><circle cx="22" cy="16" r="6" fill="#5C5340"/><circle cx="40" cy="16" r="6" fill="#4E4636"/><line x1="26" y1="22" x2="44" y2="30" stroke="#8A7E5E" stroke-width="2"/></svg></div>
+        <div class="cbody"><div class="ct">Counter to the grip</div><div class="cm">GETTY 27r · has note</div></div>
+        <span class="cgrip">⋮⋮</span>
+      </div>
+    </div>
+  </div>
+  <p class="cap">A shelf, not a script</p>
+
+  <div class="q"><span class="n">12</span>
+    <p>When you teach, do you plan the session in advance, or pick a topic and see where it goes?</p>
+    <p>No right answer — I'm genuinely unsure, and it changes what's worth building.</p>
+  </div>
+
+  <div class="q"><span class="n">13</span>
+    <p>If something like this existed, would you use it for prep, or is it solving a problem you don't have?</p>
+  </div>
+</section>
+
+<!-- ===== BEYOND ===== -->
+<section>
+  <h2>Beyond Fiore</h2>
+  <p class="lede">The plan is to build it so other treatises can be added — I.33, dall'Agocchie, the messer material, the German longsword glosses. Text-only sources work the same way, with the original text taking the place of the image.</p>
+
+  <div class="q"><span class="n">14</span>
+    <p>Do you study anything outside Fiore? Would you want it in the same app?</p>
+    <p>Or would you rather it did one thing properly?</p>
+  </div>
+</section>
+
+<!-- ===== END ===== -->
+<section>
+  <h2>Last two</h2>
+
+  <div class="q"><span class="n">15</span>
+    <p>What's missing? Anything you expected to see and didn't.</p>
+  </div>
+
+  <div class="q"><span class="n">16</span>
+    <p>Be honest — would you still be opening this in a month, or is it a nice idea you'd try twice?</p>
+  </div>
+</section>
+
+<div class="end">
+  <p>Sketches only — nothing here is built. Manuscript images are rough placeholders and the Italian is not a real transcription.</p>
+  <p>Reply in the chat with numbers. Short answers are perfect, and disagreement is more useful than encouragement.</p>
+</div>
+
+</div>
+
+<script>
+(function(){
+  var V={study:['orig','trans','mine','prem','wit'],plain:['trans'],mine:['orig','trans','mine']};
+  var box=document.getElementById('L');
+  if(box){
+    var c={};
+    [].forEach.call(box.querySelectorAll('.layer'),function(e){c[e.dataset.l]=e;});
+    function set(n){
+      var o=V[n]||V.study;
+      Object.keys(c).forEach(function(k){c[k].hidden=o.indexOf(k)===-1;});
+      o.forEach(function(k){if(c[k])box.appendChild(c[k]);});
+    }
+    var bs=document.querySelectorAll('.view[data-v]');
+    [].forEach.call(bs,function(b){
+      b.addEventListener('click',function(){
+        [].forEach.call(bs,function(x){x.setAttribute('aria-pressed','false');});
+        b.setAttribute('aria-pressed','true');
+        set(b.dataset.v);
+      });
+    });
+    set('study');
+  }
+  var regs=document.querySelectorAll('.reg');
+  [].forEach.call(regs,function(r){
+    r.addEventListener('click',function(){
+      [].forEach.call(regs,function(x){
+        x.classList.remove('on');
+        var h=x.querySelector('.hit');
+        if(h){h.setAttribute('stroke','transparent');h.setAttribute('fill','transparent');}
+      });
+      r.classList.add('on');
+      var h=r.querySelector('.hit');
+      if(h){h.setAttribute('stroke','#C9973F');h.setAttribute('fill','rgba(201,151,63,0.10)');}
+    });
+  });
+  var first=document.querySelector('.reg.on .hit');
+  if(first){first.setAttribute('stroke','#C9973F');first.setAttribute('fill','rgba(201,151,63,0.10)');}
+
+  function grp(sel,child){
+    [].forEach.call(document.querySelectorAll(sel),function(b){
+      b.addEventListener('click',function(){
+        [].forEach.call(b.parentElement.querySelectorAll(child),function(x){x.setAttribute('aria-pressed','false');});
+        b.setAttribute('aria-pressed','true');
+      });
+    });
+  }
+  grp('.facets .facet','.facet');
+  grp('.crow .vis','.vis');
+})();
+</script>
+</html>
