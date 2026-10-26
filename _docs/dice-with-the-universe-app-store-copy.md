@@ -2,9 +2,9 @@
 
 Last updated: October 2026
 
-Written from the product page (`dice-with-the-universe/index.html`). Unlike the
-Basic Reader copy, none of these claims have been checked against the game's
-code — see the verification list at the bottom.
+Written from the product page (`dice-with-the-universe/index.html`) and checked
+against the game's code and data in October 2026 — see the verification list at
+the bottom.
 
 ---
 
@@ -32,15 +32,16 @@ Roll physics-driven dice against 15 of history's greatest minds. Push your luck,
 
 ## Category
 
-Primary: Games. Suggested game subcategories: Dice, Strategy.
+Primary: Games. Suggested game subcategories (up to two allowed): Board, Strategy.
+There is no Dice subcategory; confirm the exact options in App Store Connect.
 
 ## Keywords (100 chars max)
 
 ```
-push,luck,roguelike,campaign,boss,single,player,offline,strategy,d20,d12,tabletop,3d,ancient,casual
+push,luck,risk,campaign,boss,single,player,offline,strategy,d20,d12,tabletop,3d,ancient,casual
 ```
 
-99 characters. Words excluded because they are already indexed from the name,
+94 characters. Words excluded because they are already indexed from the name,
 subtitle, or category: dice, universe, farkle, physics, history, games.
 
 ---
@@ -52,6 +53,8 @@ God doesn't play dice with the universe. You do.
 
 Roll real, physics-driven dice against 15 of history's greatest minds, from ancient shamans to a rogue AI, in a Farkle strategy game where every roll is a gamble and every opponent has their own idea of risk.
 
+Free to play through the first period. A one-time purchase unlocks the full campaign and Quick Game.
+
 --- PUSH YOUR LUCK ---
 
 Farkle is simple to learn and hard to master. Roll, set aside your scoring dice, then decide: bank your points, or risk it all for one more throw? Bank too early and you fall behind. Push too far and you lose everything.
@@ -60,7 +63,7 @@ Every roll is real. Dice tumble, bounce, and settle using full 3D physics, with 
 
 --- RIVALS WITH PERSONALITY ---
 
-Each opponent has their own risk tolerance and banking threshold. Genghis Khan plays very differently than Leonardo da Vinci. Learn how they think, then use it against them.
+Each opponent has their own risk tolerance and banking threshold. Genghis Khan takes bigger risks than Leonardo da Vinci. Learn how they think, then use it against them.
 
 --- A JOURNEY THROUGH 15 PERIODS OF HISTORY ---
 
@@ -73,7 +76,7 @@ Caesar, Hypatia, Genghis Khan, Zheng He, and da Vinci. The world is getting bigg
 RECKONING
 Louverture, Tesla, Franklin, an AI Architect, and the Last Council. The universe is watching. What will your dice say about you?
 
-Your choices across all 15 periods shape three narrative axes (Order, Voice, and Legacy), each with its own reckoning at the end. Twenty-seven ways to end the story.
+Your choices across all 15 periods shape three narrative axes in each era, and each era ends with its own reckoning. Twenty-seven ways to end the story.
 
 --- BOSS FIGHTS AND A DICE COLLECTION ---
 
@@ -96,20 +99,29 @@ Ready to roll against history?
   Connect rejects them. Plain `---` dividers and plain hyphens are safe.
 - Do not add "Yahtzee" to the keywords. It is a trademark and Apple can reject
   or pull listings that use another company's marks.
-- Pricing is deliberately not mentioned. If Dice launches free-with-unlock like
-  Basic Reader, add a short line about it near the top; the FAQ currently only
-  says an optional human-art in-app purchase might come later.
+- The description now says the game is free through the first period with a
+  one-time purchase for the full campaign and Quick Game, matching the in-app
+  unlock (`full_campaign_unlock`). Keep this in step with the product page and
+  FAQ, which still only mention a possible human-art in-app purchase.
+- The keyword `roguelike` was removed (the game isn't one; irrelevant keywords can
+  be flagged). `risk` replaced it.
 - The FAQ discloses that the current artwork is AI-assisted. The description
   doesn't mention it, so check that App Store Connect's own questionnaires
   answer consistently with the FAQ.
 
-## To verify before submitting (all taken from the product page)
+## Verification (checked against the game, October 2026)
 
-- [ ] Full 3D physics dice, no predetermined outcomes
-- [ ] 15 periods, three eras, and the opponent names listed per era
-- [ ] Bosses at the end of each period that award one of their dice
-- [ ] D4, D8, D12, D20 unlocks, and a loadout of six dice
-- [ ] Per-opponent risk tolerance and banking threshold
-- [ ] Era-specific music and visual themes
-- [ ] "Twenty-seven ways to end the story" matches the real number of endings
-- [ ] iPhone only, as the page says (the copy never names a platform)
+- [x] Full 3D physics dice (DiceCreator `PhysicsDie`); outcomes come from the physics, not a script
+- [x] 15 periods in three eras, with the opponent names listed per era
+- [x] A boss ends each period and awards one of its dice
+- [x] D4, D8, D12, D20 unlocks, and a loadout of six dice
+- [x] Per-opponent risk tolerance and banking threshold (e.g. Genghis Khan banks at 350 with
+      risk 0.45; Leonardo da Vinci at 300 with risk 0.3), hence "takes bigger risks"
+- [x] Music changes per period and the visual themes change per era
+- [x] 27 endings (3 x 3 x 3 archetype combinations)
+- [x] Three narrative axes per era, nine in total (the old sentence named three of them
+      as if they were the only three)
+- [ ] Platform: the copy never names one. The page says iPhone only; the app also runs
+      on iPad in compatibility mode.
+- [ ] Re-read the final text in App Store Connect against the age-rating and privacy
+      answers, and against the AI-assisted-artwork disclosure in the FAQ.
