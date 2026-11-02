@@ -74,7 +74,7 @@ EXPANSION
 Caesar, Hypatia, Genghis Khan, Zheng He, and da Vinci. The world is getting bigger, and so is what you stand to lose.
 
 RECKONING
-Louverture, Tesla, Franklin, an AI Architect, and the Last Council. The universe is watching. What will your dice say about you?
+Louverture, Tesla, Rosalind Franklin, an AI Architect, and the Last Council. The universe is watching. What will your dice say about you?
 
 Your choices across all 15 periods shape three narrative axes in each era, and each era ends with its own reckoning. Twenty-seven ways to end the story.
 

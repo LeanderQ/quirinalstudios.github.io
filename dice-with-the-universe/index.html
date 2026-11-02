@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dice With the Universe — Quirinal Studios</title>
-  <meta name="description" content="Roll dice against history's greatest minds. A Farkle strategy game spanning 15 periods of human civilization, coming soon to iPhone." />
+  <meta name="description" content="Roll physics-driven dice against 15 of history's greatest minds. A Farkle strategy campaign spanning 15 periods of human civilization, coming soon to iPhone." />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -20,6 +20,9 @@
       --gold: #c8b850;
       --gold-bg: #2a2a12;
       --gold-border: #4a4a20;
+      --green: #4ade80;
+      --green-bg: #0d2318;
+      --green-border: #1a4530;
     }
 
     body {
@@ -44,11 +47,37 @@
     nav a:hover { color: var(--text); }
 
     /* ── Hero ── */
-    header {
+    .hero {
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      padding: 72px 24px 64px;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 40%;
+      opacity: 0.55;
+    }
+    .hero-bg::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(15, 15, 17, 0.55) 0%, rgba(15, 15, 17, 0.35) 35%, var(--bg) 100%);
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
       max-width: 720px;
       margin: 0 auto;
-      padding: 64px 24px 56px;
-      text-align: center;
     }
 
     .app-icon {
@@ -67,13 +96,15 @@
       font-size: clamp(2rem, 5vw, 3rem);
       font-weight: 700;
       letter-spacing: -0.02em;
+      text-shadow: 0 2px 18px rgba(0, 0, 0, 0.6);
     }
 
     .tagline {
       margin-top: 14px;
-      color: var(--muted);
+      color: #c9c9db;
       font-size: 1.15rem;
       font-style: italic;
+      text-shadow: 0 1px 12px rgba(0, 0, 0, 0.7);
     }
 
     .hero-desc {
@@ -83,7 +114,7 @@
       max-width: 540px;
       margin-left: auto;
       margin-right: auto;
-      opacity: 0.85;
+      text-shadow: 0 1px 12px rgba(0, 0, 0, 0.7);
     }
 
     .badge {
@@ -134,7 +165,7 @@
 
     /* ── Screenshots ── */
     .screenshots {
-      margin-top: 64px;
+      margin-top: 24px;
     }
 
     .screenshots-scroll {
@@ -142,45 +173,29 @@
       gap: 16px;
       margin-top: 28px;
       overflow-x: auto;
-      padding-bottom: 8px;
-      scrollbar-width: none;
+      padding-bottom: 12px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
     }
-    .screenshots-scroll::-webkit-scrollbar { display: none; }
 
     .screenshot {
-      flex: 0 0 220px;
-      height: 390px;
-      border-radius: 20px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      overflow: hidden;
-      position: relative;
+      flex: 0 0 auto;
     }
 
     .screenshot img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      display: block;
+      height: 440px;
+      width: auto;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: var(--surface);
     }
 
-    /* Placeholder style for missing screenshots */
-    .screenshot-placeholder {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      background: var(--surface-2);
-    }
-    .screenshot-placeholder .ph-icon { font-size: 2rem; opacity: 0.3; }
-    .screenshot-placeholder .ph-label {
-      font-size: 0.75rem;
+    .screenshot figcaption {
+      margin-top: 8px;
+      font-size: 0.78rem;
       color: var(--muted);
       text-align: center;
-      padding: 0 16px;
-      opacity: 0.6;
     }
 
     /* ── Features ── */
@@ -262,6 +277,53 @@
       color: var(--muted);
     }
 
+    .era-content p + p { margin-top: 6px; }
+
+    /* ── Pricing ── */
+    .pricing {
+      margin-top: 64px;
+    }
+
+    .pricing-grid {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      margin-top: 28px;
+    }
+
+    .plan {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px 22px;
+    }
+
+    .plan.unlock {
+      background: var(--green-bg);
+      border-color: var(--green-border);
+    }
+
+    .plan h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+    .plan.unlock h3 { color: var(--green); }
+    .plan p { font-size: 0.88rem; color: var(--muted); }
+    .plan p + p { margin-top: 8px; }
+
+    .promises {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .promise {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 8px 14px;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
     /* ── Dice CTA ── */
     .dice-cta {
       margin-top: 64px;
@@ -319,13 +381,6 @@
     }
     footer a { color: var(--muted); }
     footer a:hover { color: var(--text); }
-
-    /* ── Divider ── */
-    .divider {
-      height: 1px;
-      background: var(--border);
-      margin: 64px 0 0;
-    }
   </style>
 </head>
 <body>
@@ -333,17 +388,22 @@
   <nav><a href="/">← Quirinal Studios</a></nav>
 
   <!-- ── Hero ── -->
-  <header>
-    <div class="app-icon">
-      <img src="/images/DiceWithTheUniverse Icon.jpeg" alt="Dice With the Universe icon" />
+  <header class="hero">
+    <div class="hero-bg">
+      <img src="media/hero.jpg" alt="" />
     </div>
-    <h1>Dice With the Universe</h1>
-    <p class="tagline">God doesn't play dice with the universe. You do.</p>
-    <p class="hero-desc">
-      A physics-based Farkle strategy game. Roll against 15 of history's greatest minds —
-      from ancient shamans to rogue AI — and build a dice collection worthy of the ages.
-    </p>
-    <span class="badge">Coming soon to iPhone</span>
+    <div class="hero-inner">
+      <div class="app-icon">
+        <img src="../images/DiceWithTheUniverse Icon.jpeg" alt="Dice With the Universe icon" />
+      </div>
+      <h1>Dice With the Universe</h1>
+      <p class="tagline">God doesn't play dice with the universe. You do.</p>
+      <p class="hero-desc">
+        A physics-based Farkle strategy campaign. Roll against 15 of history's greatest minds —
+        from the First Shaman to the Last Council — and build a dice collection worthy of the ages.
+      </p>
+      <span class="badge">Coming soon to iPhone</span>
+    </div>
   </header>
 
   <main>
@@ -353,48 +413,35 @@
       <p class="section-label">Screenshots</p>
       <div class="screenshots-scroll">
 
-        <div class="screenshot">
-          <!-- PLACEHOLDER: In-game dice rolling shot. Show 6 physics dice mid-roll
-               on a dark tabletop surface, some tumbling, some settled. Portrait orientation.
-               File: /dice-with-the-universe/screenshots/gameplay.png -->
-          <div class="screenshot-placeholder">
-            <div class="ph-icon">🎲</div>
-            <div class="ph-label">Gameplay — dice mid-roll on the table</div>
-          </div>
-        </div>
+        <figure class="screenshot">
+          <img src="screenshots/gameplay-hypatia.jpg" alt="Mid-match against Hypatia of Alexandria on a marble table, with a mix of stone and jade dice" />
+          <figcaption>Period 7 · Hypatia of Alexandria</figcaption>
+        </figure>
 
-        <div class="screenshot">
-          <!-- PLACEHOLDER: Dice selection / scoring moment. Show kept dice glowing
-               or positioned in the kept area with a score display visible at the bottom.
-               Portrait orientation.
-               File: /dice-with-the-universe/screenshots/selection.png -->
-          <div class="screenshot-placeholder">
-            <div class="ph-icon">✦</div>
-            <div class="ph-label">Choosing which dice to keep</div>
-          </div>
-        </div>
+        <figure class="screenshot">
+          <img src="screenshots/campaign-map.jpg" alt="The campaign map, a winding path through the Origins era" />
+          <figcaption>The campaign map</figcaption>
+        </figure>
 
-        <div class="screenshot">
-          <!-- PLACEHOLDER: Campaign / era selection screen or level transition screen.
-               Should feel epic — opponent portrait, period name, your score vs theirs.
-               Portrait orientation.
-               File: /dice-with-the-universe/screenshots/campaign.png -->
-          <div class="screenshot-placeholder">
-            <div class="ph-icon">🌍</div>
-            <div class="ph-label">Campaign map — opponent challenge screen</div>
-          </div>
-        </div>
+        <figure class="screenshot">
+          <img src="screenshots/narrative-choice.jpg" alt="A narrative choice from the Stranger: Let's play, or I'd rather watch" />
+          <figcaption>Choices that shape history</figcaption>
+        </figure>
 
-        <div class="screenshot">
-          <!-- PLACEHOLDER: Dice loadout screen. Show the player's collection of unlocked
-               dice — different shapes (D4, D6, D8, D12, D20) with themed materials.
-               Portrait orientation.
-               File: /dice-with-the-universe/screenshots/loadout.png -->
-          <div class="screenshot-placeholder">
-            <div class="ph-icon">⚄</div>
-            <div class="ph-label">Dice loadout — customize your pool of 6</div>
-          </div>
-        </div>
+        <figure class="screenshot">
+          <img src="screenshots/gameplay-tutorial.jpg" alt="Dice mid-roll on a slate table during the tutorial" />
+          <figcaption>Real physics, every roll</figcaption>
+        </figure>
+
+        <figure class="screenshot">
+          <img src="screenshots/choose-character.jpg" alt="Choosing your character from six portraits" />
+          <figcaption>Choose your character</figcaption>
+        </figure>
+
+        <figure class="screenshot">
+          <img src="screenshots/key-art.jpg" alt="Key art: a hooded figure casting dice across eras of history" />
+          <figcaption>Across every age</figcaption>
+        </figure>
 
       </div>
     </section>
@@ -409,12 +456,12 @@
         <div class="feature">
           <div class="icon">🎲</div>
           <h3>Physics Dice</h3>
-          <p>Every roll is real. Dice tumble, bounce, and settle using full 3D physics — no animations, no predetermined outcomes.</p>
+          <p>Every roll is real. Dice tumble, bounce, and settle using full 3D physics — no canned animations, no predetermined outcomes.</p>
         </div>
         <div class="feature">
           <div class="icon">🌍</div>
           <h3>15 Periods of History</h3>
-          <p>From the ancient shamans of the Origins era to the rogue AI of the Reckoning. Each period brings new opponents and visual themes.</p>
+          <p>From the Ancient Savanna, c. 50,000 BCE, to the far future. Sixty matches, each period with its own look and music.</p>
         </div>
         <div class="feature">
           <div class="icon">⚔️</div>
@@ -424,17 +471,32 @@
         <div class="feature">
           <div class="icon">⚄</div>
           <h3>Build Your Collection</h3>
-          <p>Unlock D4s, D8s, D12s, D20s, and more across your journey. Mix and match six dice into your personal loadout.</p>
+          <p>Win a themed die from each of the 15 bosses, from the Spirit Die to the Cosmic Die. Choose six for your Dice Set.</p>
         </div>
         <div class="feature">
-          <div class="icon">🎵</div>
-          <h3>Era Soundtrack</h3>
-          <p>Music and visual themes shift as you move through history — from ceremonial drums to synthesized tension.</p>
+          <div class="icon">📐</div>
+          <h3>New Dice, New Rules</h3>
+          <p>Each era brings a new die shape, from d4 to d20, and new scoring rules. What pays on a d6 won't pay on a d12, so your strategy has to evolve.</p>
         </div>
         <div class="feature">
           <div class="icon">🧠</div>
-          <h3>Adaptive AI</h3>
+          <h3>Opponents With Personality</h3>
           <p>Each opponent has their own risk tolerance and banking threshold. Genghis Khan plays very differently than Leonardo da Vinci.</p>
+        </div>
+        <div class="feature">
+          <div class="icon">📜</div>
+          <h3>Your Choices Matter</h3>
+          <p>Every boss poses a choice. Your answers add up to an archetype for each era, and your three archetypes decide how the story ends.</p>
+        </div>
+        <div class="feature">
+          <div class="icon">🎵</div>
+          <h3>The Sound of Each Era</h3>
+          <p>A different music track for every period, with table surfaces and dice sounds that change as you move through history.</p>
+        </div>
+        <div class="feature">
+          <div class="icon">✋</div>
+          <h3>Play Your Way</h3>
+          <p>Left-handed layout, shake to roll, haptics, adjustable opponent speed, and a short-game option. Matches save automatically, so you can pick up where you left off.</p>
         </div>
       </div>
     </section>
@@ -443,33 +505,62 @@
     <section class="journey">
       <p class="section-label">The Journey</p>
       <p class="section-title">Three eras. Twenty-seven ways to end the story.</p>
-      <p class="section-body">Your choices across 15 periods shape three narrative axes — Order, Voice, Legacy — each with its own reckoning at the end.</p>
+      <p class="section-body">Each era tracks three axes of its own. Your choices at every boss settle you into one of three archetypes per era, and the three you earn decide which of 27 endings you reach.</p>
 
       <div class="eras">
         <div class="era">
           <div class="era-number">I</div>
           <div class="era-content">
             <span class="era-tag">Origins</span>
-            <h3>The First Games</h3>
-            <p>Sit across the table from a Shaman, a Grain Keeper, Hammurabi, Akhenaten, and Qin Shi Huang. Civilization is young and the stakes are everything. Axis: Order vs. Chaos.</p>
+            <h3>What are we?</h3>
+            <p>Sit across the table from the First Shaman, the Grain Keeper, Hammurabi, Akhenaten, and Qin Shi Huang. Civilization is young and the stakes are everything.</p>
+            <p>Your axes: Order, Sacred, Boundary.</p>
           </div>
         </div>
         <div class="era">
           <div class="era-number">II</div>
           <div class="era-content">
             <span class="era-tag">Expansion</span>
-            <h3>The Age of Ambition</h3>
-            <p>Caesar, Hypatia, Genghis Khan, Zheng He, and da Vinci. The world is getting bigger — and so is what you stand to lose. Axis: Voice vs. Silence.</p>
+            <h3>Who rules us?</h3>
+            <p>Julius Caesar, Hypatia of Alexandria, Genghis Khan, Zheng He, and Leonardo da Vinci. The world is getting bigger — and so is what you stand to lose.</p>
+            <p>Your axes: Voice, Knowledge, Kinship.</p>
           </div>
         </div>
         <div class="era">
           <div class="era-number">III</div>
           <div class="era-content">
             <span class="era-tag">Reckoning</span>
-            <h3>The Final Roll</h3>
-            <p>Louverture, Tesla, Franklin, an AI Architect, and the Last Council. The universe is watching. What will your dice say about you? Axis: Legacy vs. Oblivion.</p>
+            <h3>What do we do with our own power?</h3>
+            <p>Toussaint Louverture, Nikola Tesla, Rosalind Franklin, Claudia the AI Architect, and the Last Council. The universe is watching. What will your dice say about you?</p>
+            <p>Your axes: Agency, Horizon, Legacy.</p>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- ── Pricing ── -->
+    <section class="pricing">
+      <p class="section-label">Free to start</p>
+      <p class="section-title">Play the first period free. Pay once for the rest.</p>
+      <p class="section-body">Dice With the Universe is a free download with a single one-time purchase. No subscription, no ads, no tracking.</p>
+
+      <div class="pricing-grid">
+        <div class="plan">
+          <h3>Free</h3>
+          <p>The full tutorial and all of Period 1, including the boss fight and its narrative choice.</p>
+          <p>Replay it as often as you like.</p>
+        </div>
+        <div class="plan unlock">
+          <h3>One-time unlock</h3>
+          <p>Periods 2 through 15: the rest of the campaign, and the 27 endings it can lead to.</p>
+          <p>Plus Quick Game: replay any boss you've beaten with any dice you've unlocked.</p>
+        </div>
+      </div>
+
+      <div class="promises">
+        <span class="promise">Progress syncs across your devices via iCloud</span>
+        <span class="promise">No account required</span>
+        <span class="promise">No data collected</span>
       </div>
     </section>
 
@@ -478,6 +569,9 @@
       <h2>Ready to roll against history?</h2>
       <p>Dice With the Universe is coming soon to iPhone. Check back here or follow Quirinal Studios for release news.</p>
 
+      <!-- When live, swap this div for:
+      <a class="app-store-btn" href="APP_STORE_URL" style="opacity:1;cursor:pointer;"> ...same svg... Download on the App Store</a>
+      and remove the notify-note below, and update the hero badge, meta description and FAQ. -->
       <div class="app-store-btn" title="Not yet available">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
