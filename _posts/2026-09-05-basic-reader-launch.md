@@ -3,7 +3,7 @@ title: "Quirinal Studios launches with Basic Reader"
 date: 2026-09-05 09:00:00 -0400
 categories: [basic-reader]
 ---
-Basic Reader, a fast, focused RSS and Atom reader for iPhone, iPad, and Mac, is out now on the App Store. It's free to download and free to use for reading your feeds, and a single one-time purchase unlocks the full feature set. No subscription, ever.
+Basic Reader, a fast, focused RSS and Atom reader for iPhone, iPad, and Mac, is out now on the App Store. The first public release is version 1.1; a last-minute bug in 1.0 meant it never shipped. It's free to download and free to use for reading your feeds, and a single one-time purchase unlocks the full feature set. No subscription, ever.
 
 Most RSS apps now charge $8-10 a month for things like content filtering, cross-device sync, and advanced search. Basic Reader takes a different approach: pay once, and it's yours for good.
 
