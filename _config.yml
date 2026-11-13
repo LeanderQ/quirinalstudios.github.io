@@ -1,5 +1,18 @@
 remote_theme: pages-themes/slate@v0.2.0
 plugins:
 - jekyll-remote-theme # add this line to the plugins list if you already have one
+- jekyll-feed
 title: Quirinal Studios
-description: Quirinal Studios Software Catalog
+description: News and release notes from Quirinal Studios, an independent iOS studio.
+url: https://quirinalstudios.com
+permalink: /news/:year/:month/:title/
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+feed:
+  categories:
+    - basic-reader
+    - dice-with-the-universe

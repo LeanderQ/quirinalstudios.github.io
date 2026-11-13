@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ page.title | escape }} — Quirinal Studios</title>
+  <meta name="description" content="{{ page.excerpt | strip_html | normalize_whitespace | truncate: 160 | escape }}" />
+  {% feed_meta %}
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0f0f11;
+      --surface: #1a1a1f;
+      --border: #2a2a32;
+      --text: #f0f0f5;
+      --muted: #8888a0;
+      --accent: #6e6af5;
+      --accent-hover: #8884ff;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.7;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { color: var(--accent-hover); }
+
+    nav {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 24px;
+    }
+
+    nav a { color: var(--muted); font-size: 0.9rem; }
+    nav a:hover { color: var(--text); }
+
+    main {
+      flex: 1;
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 56px 24px 80px;
+      width: 100%;
+    }
+
+    .meta {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .tag {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 6px;
+      background: rgba(110, 106, 245, 0.15);
+      color: var(--accent-hover);
+    }
+
+    h1 {
+      font-size: clamp(1.6rem, 4vw, 2.15rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 28px;
+    }
+
+    .post-body h2, .post-body h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-top: 28px;
+      margin-bottom: 8px;
+    }
+
+    .post-body p {
+      color: #c0c0d0;
+      font-size: 0.95rem;
+      margin-bottom: 14px;
+    }
+
+    .post-body ul {
+      margin: 0 0 14px 1.2em;
+      color: #c0c0d0;
+      font-size: 0.95rem;
+    }
+
+    .post-body li { margin-bottom: 6px; }
+
+    .post-body strong { color: var(--text); }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    footer a { color: var(--muted); }
+    footer a:hover { color: var(--text); }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/">← Quirinal Studios</a>
+    <a href="/news/">News</a>
+  </nav>
+
+  <main>
+    <article>
+      <div class="meta">
+        <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time>
+        {% for category in page.categories %}
+          {% if category == "basic-reader" %}<span class="tag">Basic Reader</span>{% endif %}
+          {% if category == "dice-with-the-universe" %}<span class="tag">Dice With the Universe</span>{% endif %}
+        {% endfor %}
+      </div>
+      <h1>{{ page.title | escape }}</h1>
+      <div class="post-body">
+        {{ content }}
+      </div>
+    </article>
+  </main>
+
+  <footer>
+    <p><a href="/news/">News</a> · <a href="/feed.xml">Feed</a> · <a href="/privacy">Privacy Policy</a> · &copy; 2026 Quirinal Studios</p>
+  </footer>
+
+</body>
+</html>
