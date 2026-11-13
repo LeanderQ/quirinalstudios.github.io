@@ -176,12 +176,14 @@ pricing-table row; recommend a final manual read of the FAQ page before launch)
 - **Readwise Reader** — Offers semantic/natural language search, bundled into its
   $9.99/month (billed annually) plan — corrected from $7.99. Uses cloud-based AI
   (not on-device). Source: readwise.io pricing coverage (verified July 2026)
-- **Basic Reader** — Uses Apple's NLContextualEmbedding (BERT-based) via the
-  NaturalLanguage framework. Embeddings are pre-computed on-device after each
-  refresh and cached to disk. Search uses a two-phase approach: instant word-match
-  results on each keystroke, then a 300ms debounced semantic pass re-ranking via
-  cosine similarity (Accelerate). Fully on-device — no content leaves the device.
-  Source: confirmed in SearchService.swift (June 2026)
+- **Basic Reader** — Uses Apple's NLEmbedding sentence vectors via the
+  NaturalLanguage framework (English, French, German, Spanish, Italian, and
+  Portuguese). Embeddings are computed on-device and cached to disk. Search uses a
+  two-phase approach: instant word-match results on each keystroke, then a 300ms
+  debounced semantic pass re-ranking via cosine similarity (Accelerate). Fully
+  on-device — no content leaves the device. (June 2026 wording named
+  NLContextualEmbedding; search switched to sentence embeddings afterwards.)
+  Source: SearchService.swift on main at 1.4 (November 2026)
 
 **Confidence: High** (implementation verified in code; Readwise pricing verified)
 

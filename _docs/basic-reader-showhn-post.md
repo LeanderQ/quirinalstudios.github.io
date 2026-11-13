@@ -39,7 +39,7 @@ I used NetNewsWire for years and genuinely love it — it's a big part of why I 
 A few of the more interesting technical bits:
 
 - Zero third-party dependencies. Feed parsing, networking, and search are all built on Apple's own frameworks.
-- On-device semantic search using NLContextualEmbedding (a BERT-based model via the NaturalLanguage framework). It's a two-phase search: instant word-match results on every keystroke, then a 300ms-debounced semantic re-rank via cosine similarity over Accelerate. Nothing leaves the device.
+- On-device semantic search using Apple's NLEmbedding sentence vectors (English, French, German, Spanish, Italian, and Portuguese). It's a two-phase search: instant word-match results on every keystroke, then a 300ms-debounced semantic re-rank via cosine similarity over Accelerate. I started with NLContextualEmbedding, but mean-pooling its per-token vectors gave a badly anisotropic space where unrelated articles scored 0.85-0.90 similar to each other, so no threshold separated real matches from noise. True sentence embeddings fixed that. Nothing leaves the device.
 - The filter engine (wildcard/regex/semantic rules, scoped to a feed, folder, or globally) went through a few rearchitectures once I had enough articles to notice it doing full-table rescans on every toggle. It now maintains a persisted per-article rule-mask index instead of recomputing visibility from scratch.
 - Sync is SwiftData mirrored through CloudKit — no account system, just your existing Apple ID.
 - Mac isn't a stretched iPad UI — it's Mac Catalyst with a real three-column layout, full keyboard shortcuts, and right-click context menus.

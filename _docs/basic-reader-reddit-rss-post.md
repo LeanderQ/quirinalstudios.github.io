@@ -54,5 +54,5 @@ Happy to answer questions about feed format support, the search implementation, 
 - Confirm whether the sub prefers a text post or a link post.
 - Be ready to answer follow-up questions in the comments about feed format
   support (RSS + Atom, confirmed in RSSParser.swift) and the on-device
-  semantic search implementation (NLContextualEmbedding via Apple's
-  NaturalLanguage framework).
+  semantic search implementation (NLEmbedding sentence vectors via Apple's
+  NaturalLanguage framework, six languages).

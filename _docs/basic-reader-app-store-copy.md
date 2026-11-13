@@ -108,5 +108,5 @@ The unlock is a one-time purchase. Whatever it includes today stays yours — no
   `---` dashes and em dashes (—) are fine.
 - `podcast` keyword is a stretch; remove if Apple flags it during review, or once you confirm you don't support audio enclosures.
 - Add `widgets`, `shortcuts` to keywords when those features ship.
-- The semantic search copy ("on-device AI model") is accurate — NLContextualEmbedding (BERT) via Apple's NaturalLanguage framework, verified in SearchService.swift.
+- The semantic search copy ("on-device AI model") is accurate — Apple's NLEmbedding sentence vectors (six languages: English, French, German, Spanish, Italian, Portuguese), verified in SearchService.swift on main at 1.4. (An earlier version used NLContextualEmbedding; search no longer does.)
 - Atom support confirmed in RSSParser.swift — handles `entry`, `summary`, `content`, `published`, `updated`, `id`.
