@@ -1,5 +1,6 @@
 ---
 title: "Basic Reader 1.3: smoother syncing across your devices"
+seo_title: "Basic Reader 1.3: Smoother Syncing Across Devices"
 date: 2026-11-02 09:00:00 -0500
 categories: [basic-reader]
 ---

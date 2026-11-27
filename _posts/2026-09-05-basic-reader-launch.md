@@ -1,5 +1,6 @@
 ---
 title: "Quirinal Studios launches with Basic Reader"
+seo_title: "Basic Reader Launch: A Subscription-Free RSS Reader"
 date: 2026-09-05 09:00:00 -0400
 categories: [basic-reader]
 ---

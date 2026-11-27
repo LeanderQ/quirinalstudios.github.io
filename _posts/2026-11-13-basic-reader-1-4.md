@@ -1,5 +1,6 @@
 ---
 title: "Basic Reader 1.4: full articles and mark as read on scroll"
+seo_title: "Basic Reader 1.4: Full Articles, Mark Read on Scroll"
 date: 2026-11-13 09:00:00 -0500
 categories: [basic-reader]
 ---

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{{ page.title | escape }} — Quirinal Studios</title>
+  <title>{% if page.seo_title %}{{ page.seo_title | escape }}{% else %}{{ page.title | escape }} — Quirinal Studios{% endif %}</title>
   <link rel="canonical" href="{{ page.url | absolute_url }}" />
   <meta name="description" content="{{ page.excerpt | strip_html | normalize_whitespace | truncate: 160 | escape }}" />
   {% feed_meta %}
