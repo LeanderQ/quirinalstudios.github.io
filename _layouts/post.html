@@ -20,6 +20,21 @@
   }
   </script>
   <meta name="description" content="{% if page.meta_description %}{{ page.meta_description | escape }}{% else %}{{ page.excerpt | strip_html | normalize_whitespace | truncate: 160 | escape }}{% endif %}" />
+  {% capture share_title %}{% if page.seo_title %}{{ page.seo_title | escape }}{% else %}{{ page.title | escape }} — Quirinal Studios{% endif %}{% endcapture %}
+  {% capture share_description %}{% if page.meta_description %}{{ page.meta_description | escape }}{% else %}{{ page.excerpt | strip_html | normalize_whitespace | truncate: 160 | escape }}{% endif %}{% endcapture %}
+  {% assign card = "quirinal-studios" %}{% assign card_alt = "Quirinal Studios logo" %}
+  {% if page.categories contains "basic-reader" %}{% assign card = "basic-reader" %}{% assign card_alt = "Basic Reader app icon" %}{% endif %}
+  {% if page.categories contains "dice-with-the-universe" %}{% assign card = "dice-with-the-universe" %}{% assign card_alt = "Dice With the Universe app icon over artwork spanning human history" %}{% endif %}
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Quirinal Studios" />
+  <meta property="og:title" content="{{ share_title }}" />
+  <meta property="og:description" content="{{ share_description }}" />
+  <meta property="og:url" content="{{ page.url | absolute_url }}" />
+  <meta property="og:image" content="https://quirinalstudios.com/images/og/{{ card }}.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="{{ card_alt }}" />
+  <meta name="twitter:card" content="summary_large_image" />
   {% feed_meta %}
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
