@@ -1,6 +1,7 @@
 ---
 title: "Basic Reader 1.4: full articles and mark as read on scroll"
 seo_title: "Basic Reader 1.4: Full Articles, Mark Read on Scroll"
+meta_description: "Basic Reader 1.4 adds Full Articles for summary-only feeds, optional mark as read on scroll, and a list that stays put during bulk mark-read."
 date: 2026-11-13 09:00:00 -0500
 categories: [basic-reader]
 ---

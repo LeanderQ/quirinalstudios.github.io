@@ -19,7 +19,7 @@
     ]
   }
   </script>
-  <meta name="description" content="{{ page.excerpt | strip_html | normalize_whitespace | truncate: 160 | escape }}" />
+  <meta name="description" content="{% if page.meta_description %}{{ page.meta_description | escape }}{% else %}{{ page.excerpt | strip_html | normalize_whitespace | truncate: 160 | escape }}{% endif %}" />
   {% feed_meta %}
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }

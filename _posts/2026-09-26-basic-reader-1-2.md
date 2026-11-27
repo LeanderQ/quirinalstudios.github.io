@@ -1,6 +1,7 @@
 ---
 title: "Basic Reader 1.2: feed previews, sharing from Safari, and feed health"
 seo_title: "Basic Reader 1.2: Feed Previews and Safari Sharing"
+meta_description: "Basic Reader 1.2 adds feed previews, sharing from Safari, feed health indicators, smoother scrolling with images, and fixes for stuck feeds."
 date: 2026-09-26 09:00:00 -0400
 categories: [basic-reader]
 ---
