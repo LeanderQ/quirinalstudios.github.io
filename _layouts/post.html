@@ -173,11 +173,24 @@
         <li><a href="/dice-with-the-universe/">Dice With the Universe</a></li>
         <li><a href="/press/dice-with-the-universe-launch/">Press release: Dice With the Universe</a></li>
         {% endif %}
+        {% assign posts = site.categories[topic] %}
+        {% for post in posts %}{% if post.url == page.url %}{% assign here = forloop.index0 %}{% endif %}{% endfor %}
+        {% comment %}Posts are newest first. Link the one before this, the one after, then the newest.{% endcomment %}
+        {% assign older = here | plus: 1 %}
+        {% assign newer = here | minus: 1 %}
+        {% capture order %}{{ older }},{{ newer }},0,1,2,3{% endcapture %}
+        {% assign candidates = order | split: "," %}
+        {% assign used = "|" %}
         {% assign shown = 0 %}
-        {% for post in site.categories[topic] %}
-          {% if post.url != page.url and shown < 3 %}
-            <li><a href="{{ post.url }}">{{ post.title | escape }}</a></li>
-            {% assign shown = shown | plus: 1 %}
+        {% for candidate in candidates %}
+          {% assign i = candidate | plus: 0 %}
+          {% capture key %}|{{ i }}|{% endcapture %}
+          {% if shown < 3 and i >= 0 and i < posts.size and i != here %}
+            {% unless used contains key %}
+              <li><a href="{{ posts[i].url }}">{{ posts[i].title | escape }}</a></li>
+              {% assign used = used | append: key %}
+              {% assign shown = shown | plus: 1 %}
+            {% endunless %}
           {% endif %}
         {% endfor %}
         {% if shown == 0 %}<li><a href="/news/">All news</a></li>{% endif %}
