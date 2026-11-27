@@ -126,6 +126,13 @@
 
     footer a { color: var(--muted); }
     footer a:hover { color: var(--text); }
+    nav { display: flex; flex-wrap: wrap; gap: 8px 24px; }
+    .breadcrumbs { font-size: 0.8rem; color: var(--muted); margin-bottom: 20px; }
+    .breadcrumbs a { color: var(--muted); text-decoration: underline; }
+    .related { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); }
+    .related h2 { font-size: 1rem; margin: 0 0 10px; }
+    .related ul { margin: 0 0 0 1.2em; font-size: 0.95rem; }
+    .related li { margin-bottom: 6px; }
   </style>
   <script type="module" src="/js/analytics.js"></script>
 </head>
@@ -134,9 +141,14 @@
   <nav>
     <a href="/">← Quirinal Studios</a>
     <a href="/news/">News</a>
+    <a href="/basic-reader/">Basic Reader</a>
+    <a href="/dice-with-the-universe/">Dice With the Universe</a>
   </nav>
 
   <main>
+    {% assign topic = page.categories | first %}
+    <p class="breadcrumbs"><a href="/">Home</a> › <a href="/news/">News</a>{% if topic == "basic-reader" %} › <a href="/basic-reader/">Basic Reader</a>{% elsif topic == "dice-with-the-universe" %} › <a href="/dice-with-the-universe/">Dice With the Universe</a>{% endif %}</p>
+
     <article>
       <div class="meta">
         <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time>
@@ -150,10 +162,32 @@
         {{ content }}
       </div>
     </article>
+
+    <aside class="related" aria-label="Related">
+      <h2>Related</h2>
+      <ul>
+        {% if topic == "basic-reader" %}
+        <li><a href="/basic-reader/">Basic Reader</a></li>
+        <li><a href="/press/basic-reader-launch/">Press release: Quirinal Studios launches with Basic Reader</a></li>
+        {% elsif topic == "dice-with-the-universe" %}
+        <li><a href="/dice-with-the-universe/">Dice With the Universe</a></li>
+        <li><a href="/press/dice-with-the-universe-launch/">Press release: Dice With the Universe</a></li>
+        {% endif %}
+        {% assign shown = 0 %}
+        {% for post in site.categories[topic] %}
+          {% if post.url != page.url and shown < 3 %}
+            <li><a href="{{ post.url }}">{{ post.title | escape }}</a></li>
+            {% assign shown = shown | plus: 1 %}
+          {% endif %}
+        {% endfor %}
+        {% if shown == 0 %}<li><a href="/news/">All news</a></li>{% endif %}
+      </ul>
+    </aside>
   </main>
 
   <footer>
-    <p><a href="/news/">News</a> · <a href="/feed.xml">Feed</a> · <a href="/privacy">Privacy Policy</a> · &copy; 2026 Quirinal Studios</p>
+    <p><a href="/basic-reader/">Basic Reader</a> · <a href="/dice-with-the-universe/">Dice With the Universe</a> · <a href="/news/">News</a> · <a href="/feed.xml">Feed</a> · <a href="/support/">Support</a> · <a href="/faq/">FAQ</a> · <a href="/press/">Press</a> · <a href="/privacy/">Privacy Policy</a></p>
+    <p>&copy; 2026 Quirinal Studios</p>
   </footer>
 
 </body>

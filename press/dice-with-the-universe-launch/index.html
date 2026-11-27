@@ -168,6 +168,13 @@
 
     footer a { color: var(--muted); }
     footer a:hover { color: var(--text); }
+    nav { display: flex; flex-wrap: wrap; gap: 8px 24px; }
+    .breadcrumbs { font-size: 0.8rem; color: var(--muted); margin-bottom: 20px; }
+    .breadcrumbs a { color: var(--muted); text-decoration: underline; }
+    .related { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); }
+    .related h2 { font-size: 1rem; margin: 0 0 10px; }
+    .related ul { margin: 0 0 0 1.2em; font-size: 0.95rem; }
+    .related li { margin-bottom: 6px; }
   </style>
   <link rel="alternate" type="application/atom+xml" title="Quirinal Studios" href="/feed.xml" />
   <script type="module" src="/js/analytics.js"></script>
@@ -177,9 +184,12 @@
   <nav>
     <a href="/">← Quirinal Studios</a>
     <a href="/press">Press</a>
+    <a href="/basic-reader/">Basic Reader</a>
+    <a href="/dice-with-the-universe/">Dice With the Universe</a>
   </nav>
 
   <main>
+    <p class="breadcrumbs"><a href="/">Home</a> › <a href="/press/">Press</a> › Dice With the Universe launch</p>
     <p class="label">For Immediate Release</p>
     <h1>Quirinal Studios Releases Dice With the Universe, a Physics-Based Farkle Campaign Through 15 Periods of Human History</h1>
     <p class="dateline">Toronto, Ontario — November 6, 2026</p>
@@ -223,10 +233,20 @@
       <strong>Media inquiries</strong>
       <p><a href="mailto:press@quirinalstudios.com">press@quirinalstudios.com</a></p>
     </div>
+
+    <aside class="related" aria-label="Related">
+      <h2>Related</h2>
+      <ul>
+        <li><a href="/dice-with-the-universe/">Dice With the Universe</a></li>
+        <li><a href="/news/2026/11/dice-with-the-universe-launch/">News: Dice With the Universe is out now</a></li>
+        <li><a href="/press/basic-reader-launch/">Press release: Quirinal Studios launches with Basic Reader</a></li>
+      </ul>
+    </aside>
   </main>
 
   <footer>
-    <p>&copy; 2026 Quirinal Studios · <a href="/privacy">Privacy Policy</a></p>
+    <p><a href="/basic-reader/">Basic Reader</a> · <a href="/dice-with-the-universe/">Dice With the Universe</a> · <a href="/news/">News</a> · <a href="/support/">Support</a> · <a href="/faq/">FAQ</a> · <a href="/press/">Press</a> · <a href="/privacy/">Privacy Policy</a></p>
+    <p>&copy; 2026 Quirinal Studios</p>
   </footer>
 
 </body>

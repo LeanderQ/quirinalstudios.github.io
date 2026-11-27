@@ -1,3 +1,6 @@
+---
+layout: null
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -398,6 +401,9 @@
     }
     footer a { color: var(--muted); }
     footer a:hover { color: var(--text); }
+    nav { display: flex; flex-wrap: wrap; gap: 8px 24px; }
+    .app-news ul { list-style: none; padding: 0; margin: 0 0 56px; }
+    .app-news li { padding: 10px 0; border-bottom: 1px solid var(--border); }
   </style>
   <link rel="alternate" type="application/atom+xml" title="Quirinal Studios" href="/feed.xml" />
   <link rel="alternate" type="application/atom+xml" title="Dice With the Universe news" href="/feed/dice-with-the-universe.xml" />
@@ -405,7 +411,10 @@
 </head>
 <body>
 
-  <nav><a href="/">← Quirinal Studios</a></nav>
+  <nav><a href="/">← Quirinal Studios</a>
+    <a href="/basic-reader/">Basic Reader</a>
+    <a href="/dice-with-the-universe/">Dice With the Universe</a>
+  </nav>
 
   <!-- ── Hero ── -->
   <header class="hero">
@@ -595,10 +604,21 @@
       </a>
     </section>
 
+    <section class="app-news">
+      <p class="section-label">News</p>
+      <ul>
+        {% for post in site.categories['dice-with-the-universe'] %}
+        <li><a href="{{ post.url }}">{{ post.title | escape }}</a></li>
+        {% endfor %}
+        <li><a href="/press/dice-with-the-universe-launch/">Press release: Dice With the Universe</a></li>
+      </ul>
+    </section>
+
   </main>
 
   <footer>
-    <p><a href="/support">Support</a> · <a href="/faq">FAQ</a> · <a href="/privacy">Privacy Policy</a> · &copy; 2026 Quirinal Studios</p>
+    <p><a href="/basic-reader/">Basic Reader</a> · <a href="/dice-with-the-universe/">Dice With the Universe</a> · <a href="/news/">News</a> · <a href="/support/">Support</a> · <a href="/faq/">FAQ</a> · <a href="/press/">Press</a> · <a href="/privacy/">Privacy Policy</a></p>
+    <p>&copy; 2026 Quirinal Studios</p>
   </footer>
 
 </body>
