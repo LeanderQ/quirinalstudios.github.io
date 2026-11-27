@@ -16,3 +16,5 @@ Opening paragraph. It is used as the feed summary.
 - `categories`: `basic-reader` or `dice-with-the-universe`, which selects the app feed.
 - `date`: use the real release date. A date in the future keeps the post unpublished. Use `-0400` during daylight saving time.
 - Include `seo_title` and `meta_description` on every post.
+- Start sections with `##`, and use `###` only for subsections under one.
+- If you substantially revise a published post, add `last_modified_at: YYYY-MM-DD`.

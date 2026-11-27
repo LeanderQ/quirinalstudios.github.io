@@ -6,7 +6,7 @@ categories: [basic-reader]
 ---
 If you read on more than one device, the morning catch-up is now much faster. Duplicate articles that arrive while your devices sync are hidden straight away, and the cleanup now happens overnight while your device charges.
 
-### More reliable
+## More reliable
 
 - Fixed a rare sync issue that could make an article, along with its star, disappear from all your devices.
 - A feed whose server returns an error now shows that error instead of failing silently.

@@ -35,6 +35,26 @@
   <meta property="og:image:height" content="630" />
   <meta property="og:image:alt" content="{{ card_alt }}" />
   <meta name="twitter:card" content="summary_large_image" />
+  {% capture headline %}{% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }} — Quirinal Studios{% endif %}{% endcapture %}
+  {% capture summary %}{% if page.meta_description %}{{ page.meta_description }}{% else %}{{ page.excerpt | strip_html | normalize_whitespace | truncate: 160 }}{% endif %}{% endcapture %}
+  {% capture card_url %}https://quirinalstudios.com/images/og/{{ card }}.jpg{% endcapture %}
+  {% assign page_url = page.url | absolute_url %}
+  {% assign modified = page.last_modified_at | default: page.date %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": {{ headline | jsonify }},
+    "description": {{ summary | jsonify }},
+    "image": {{ card_url | jsonify }},
+    "url": {{ page_url | jsonify }},
+    "mainEntityOfPage": {{ page_url | jsonify }},
+    "datePublished": {{ page.date | date_to_xmlschema | jsonify }},
+    "dateModified": {{ modified | date_to_xmlschema | jsonify }},
+    "author": {"@type": "Organization", "name": "Quirinal Studios", "url": "https://quirinalstudios.com"},
+    "publisher": {"@type": "Organization", "name": "Quirinal Studios", "url": "https://quirinalstudios.com", "logo": {"@type": "ImageObject", "url": "https://quirinalstudios.com/images/quirinal-studios-logo.png"}}
+  }
+  </script>
   {% feed_meta %}
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
