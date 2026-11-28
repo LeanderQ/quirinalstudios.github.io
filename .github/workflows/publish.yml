@@ -1,0 +1,50 @@
+name: Sitemap and IndexNow
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: sitemap-indexnow
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # lastmod dates come from the history
+
+      - name: Update the sitemap
+        run: |
+          python3 _scripts/sitemap.py
+          if [ -n "$(git status --porcelain -- sitemap.xml)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add sitemap.xml
+            git commit -m "Update sitemap.xml"
+            git push
+            # A push made by a workflow does not start a Pages build by itself.
+            gh api -X POST "repos/$GITHUB_REPOSITORY/pages/builds"
+          fi
+
+      - name: Wait for the site to publish
+        run: |
+          head=$(git rev-parse HEAD)
+          for attempt in $(seq 1 60); do
+            state=$(gh api "repos/$GITHUB_REPOSITORY/pages/builds/latest" --jq '.status + " " + .commit')
+            if [ "$state" = "built $head" ]; then exit 0; fi
+            if [ "$state" = "errored $head" ]; then echo "Pages build failed"; exit 1; fi
+            sleep 10
+          done
+          echo "Timed out waiting for the Pages build"
+          exit 1
+
+      - name: Tell IndexNow which pages changed
+        run: python3 _scripts/sitemap.py --ping "${{ github.event.before }}" HEAD
