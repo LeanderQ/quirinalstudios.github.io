@@ -14,7 +14,7 @@ to all incoming requests, and add each header with "Set static".
 Content-Security-Policy-Report-Only value, one line:
 
 ```
-default-src 'self'; script-src 'self' https://esm.sh 'sha256-WuIl+kdB5bYd5bsPGcsfjKGbEenw8bfDCUrK1uAOCL8=' 'sha256-oGwnBxWHqtWAcK3+qW3A2rs/Fc71IM9SD9XJhWPwpbM=' 'sha256-QoPLR3bIuPeBRlYOdUFdKWYeUQqEQh60KfBT+ZdA1qg=' 'sha256-QBL8mpYnOmRLeVyXmm3pmzzhAFap6z+yE142zIcxGUo='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://ipip.fyi; connect-src 'self' https://in.heycatch.ai; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
+default-src 'self'; script-src 'self' https://esm.sh https://static.cloudflareinsights.com 'sha256-WuIl+kdB5bYd5bsPGcsfjKGbEenw8bfDCUrK1uAOCL8=' 'sha256-oGwnBxWHqtWAcK3+qW3A2rs/Fc71IM9SD9XJhWPwpbM=' 'sha256-QoPLR3bIuPeBRlYOdUFdKWYeUQqEQh60KfBT+ZdA1qg=' 'sha256-QBL8mpYnOmRLeVyXmm3pmzzhAFap6z+yE142zIcxGUo='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://ipip.fyi; connect-src 'self' https://in.heycatch.ai https://cloudflareinsights.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
 ```
 
 ## Tightening the policy
